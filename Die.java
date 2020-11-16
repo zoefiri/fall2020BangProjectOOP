@@ -1,4 +1,3 @@
-package fall2020BangProjectOOP;
 import java.util.Random;
 
 public class Die {

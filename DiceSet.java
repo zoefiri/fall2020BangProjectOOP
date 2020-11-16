@@ -1,5 +1,3 @@
-package fall2020BangProjectOOP;
-
 public class DiceSet {
 
 	private Die[] dice;
