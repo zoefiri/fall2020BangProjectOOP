@@ -19,9 +19,12 @@ public class DiceSet {
 		return out;
 	}
 
-	public void roll() {
-		for (Die d : dice) {
-			d.roll();
+	public void roll(boolean[] diceToRoll) {
+		if (diceToRoll.length < numDice) {
+			System.out.println("Error in DiceSet.roll: diceToRoll is too short, need at least " + numDice + " values");
+		}
+		for (int i = 0; i < numDice; i++) {
+			if (diceToRoll[i]) dice[i].roll();
 		}
 	}
 }

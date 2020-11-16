@@ -1,3 +1,5 @@
+import javax.lang.model.element.Element;
+
 public class Player {
 
 	public enum Character {
@@ -22,6 +24,7 @@ public class Player {
 	private int arrows;
 	private Character character;
 	private Role role;
+	private boolean elimiated;
 
 	public Player(Character character, Role role) {
 		this.character = character;
@@ -42,11 +45,15 @@ public class Player {
 	}
 
 	public int addHP(int heal) {
-		return hp += heal;
+		hp += heal;
+		if (hp > getMaxHP()) hp = getMaxHP();
+		return hp;
 	}
 
 	public int removeHP(int hit) {
-		return hp -= hit;
+		hp -= hit;
+		elimiated = hp <= 0;
+		return hp;
 	}
 
 	public Role getRole() {
@@ -67,6 +74,10 @@ public class Player {
 
 	public int getMaxHP() {
 		return getMaxHPOfCharacter(character);
+	}
+
+	public boolean isEliminated() {
+		return elimiated;
 	}
 
 	public static int getMaxHPOfCharacter(Character character) {
