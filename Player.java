@@ -94,5 +94,7 @@ public class Player {
 			case ROSE_DOOLAN:
 				return 9;
 		}
+		return -1; //needs explicit return statement or default case
 	} 
+	
 }
