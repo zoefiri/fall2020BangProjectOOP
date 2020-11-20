@@ -1,6 +1,8 @@
 import java.util.Random;
 
-public class Die {
+public abstract class Die{
+
+	protected static final Random rand = new Random();
 
 	public enum Face {
 		ARROW,
@@ -8,24 +10,31 @@ public class Die {
 		SHOOT1,
 		SHOOT2,
 		BEER,
-		GATLING
-	}
-	
-	private boolean locked; //having the state of the die bound to the object makes UI retrieval easier
+		GATLING,
+		SHOOT1_2X,
+		SHOOT2_2X,
+		SILVERBULLET,
+		BROKEN_ARROW,
+		BEER_2X,
+		DUEL,
+		DUEL_,
+		WHISKY
+	};
+
+	protected abstract Face[] getPossibleFaces();
+
 	private boolean unlockable; //can the user toggle the lock state, or is it locked by game rules
-	private Face currentFace;
 
-	public Die() {
-		currentFace = Face.ARROW;
-	}
+	Face currentFace;
 
-	public Face roll() {
-		Random rand = new Random();
-		currentFace = Face.values()[rand.nextInt(6)];
+	public Face roll(){
+		currentFace = getPossibleFaces()[rand.nextInt(getPossibleFaces().length)];
+		unlockable = currentFace != Face.DYNAMITE;
 		return currentFace;
 	}
+		
 
 	public Face getCurrentFace() {
 		return currentFace;
-	}
+	};
 }
