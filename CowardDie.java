@@ -11,9 +11,9 @@ public class CowardDie extends Die{
 		Face.ARROW,
 		Face.BROKEN_ARROW,
 		Face.BEER
-	}
+	};
 
-        private boolean locked; //having the state of the die bound to the object makes UI retrieval easier
+	private boolean locked; //having the state of the die bound to the object makes UI retrieval easier
 	private boolean unlockable; //can the user toggle the lock state, or is it locked by game rules
 	private Face currentFace;
 

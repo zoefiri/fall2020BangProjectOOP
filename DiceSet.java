@@ -7,7 +7,7 @@ public class DiceSet {
 		dice = new Die[numDice];
 		this.numDice = numDice;
 		for (int i = 0; i < numDice; i++) {
-			dice[i] = new Die();
+			dice[i] = new VanillaDie();
 		}
 	}
 

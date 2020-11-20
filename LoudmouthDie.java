@@ -21,7 +21,7 @@ public class LoudmouthDie extends Die{
 		return possibleFaces;
 	}
 
-	public die_loudmouth() {
+	public LoudmouthDie() {
 		currentFace = Face.ARROW;
 	}
 }
