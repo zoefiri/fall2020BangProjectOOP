@@ -1,4 +1,4 @@
-package UI;
+package Fall2020OOPProject3.UI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

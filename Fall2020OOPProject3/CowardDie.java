@@ -1,27 +1,28 @@
-
+package Fall2020OOPProject3;
 
 import java.util.Random;
 
-public class BlackDie extends Die{
+public class CowardDie extends Die{
 
 	final static private Face[] possibleFaces = {
-		Face.DUEL,
-		Face.DUEL_,
+		Face.SHOOT1,
+		Face.BEER_2X,
 		Face.DYNAMITE,
 		Face.ARROW,
-		Face.GATLING,
-		Face.WHISKY
+		Face.BROKEN_ARROW,
+		Face.BEER
 	};
 
-        private boolean locked; //having the state of the die bound to the object makes UI retrieval easier
+	private boolean locked; //having the state of the die bound to the object makes UI retrieval easier
 	private boolean unlockable; //can the user toggle the lock state, or is it locked by game rules
 	private Face currentFace;
+
 
 	protected Face[] getPossibleFaces() {
 		return possibleFaces;
 	}
 
-	public BlackDie() {
+	public CowardDie() {
 		currentFace = Face.ARROW;
 	}
 }

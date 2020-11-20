@@ -1,3 +1,5 @@
+package Fall2020OOPProject3;
+
 public class DiceSet {
 
 	private Die[] dice;

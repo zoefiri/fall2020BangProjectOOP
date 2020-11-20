@@ -1,23 +1,23 @@
-
+package Fall2020OOPProject3;
 
 import java.util.Random;
 
-public class die_coward {
+public class die_loudmouth {
 
 	public enum Face {
-		SHOOT1,
-		BEER_2X,
+		SHOOT1_2X,
+		SHOOT2_2X,
                 DYNAMITE,
                 ARROW,
-		BROKEN_ARROW,
-                BEER
+		GATLING,
+                SILVERBULLET
 	}
 
         private boolean locked; //having the state of the die bound to the object makes UI retrieval easier
 	private boolean unlockable; //can the user toggle the lock state, or is it locked by game rules
 	private Face currentFace;
 
-	public die_coward() {
+	public die_loudmouth() {
 		currentFace = Face.ARROW;
 	}
 
