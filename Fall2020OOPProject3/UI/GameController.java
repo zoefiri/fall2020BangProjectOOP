@@ -3,10 +3,14 @@ package Fall2020OOPProject3.UI;
 import Fall2020OOPProject3.Player;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -14,6 +18,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import javax.xml.soap.Text;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -107,7 +112,18 @@ public class GameController {
     public Circle circBot79;
 
     public Polygon polyOct;
+    
+    
+    //Die images from Roll tab
+    public ImageView imgDie1;
+    public ImageView imgDie2;
+    public ImageView imgDie3;
+    public ImageView imgDie4;
+    public ImageView imgDie5;
+
+    //Button for rolling from Roll tab
     public Button btnRoll;
+    public TableView discoveredRolesTable;
 
     //private int bots;
     private ArrayList<Player> players = new ArrayList<Player>();
@@ -139,7 +155,29 @@ public class GameController {
         for (int i = players.size(); i < rectChars.length; i++) {
             rectChars[i].setFill(new ImagePattern(none));
         }
+
+        /*
+         * Assign lambda listeners for each image which set let the player toggle their locked/unlocked state
+         * e.g. if(player == activeCharacter && this_die_unlockable) toggleLocked(); or something like this
+         */
+        
+        //showcase for reactive imageViews
+        EventHandler<MouseEvent> mouseListener = (MouseEvent e) ->{
+            if(e.getSource() instanceof ImageView) {
+                ImageView tempDieImageView = (ImageView) e.getSource();
+                tempDieImageView.setImage(new Image("file:src/Fall2020OOPProject3/UI/table.jpg"));
+            }
+        };
+        //assign listener to all images
+        imgDie1.setOnMouseClicked(mouseListener);
+        imgDie2.setOnMouseClicked(mouseListener);
+        imgDie3.setOnMouseClicked(mouseListener);
+        imgDie4.setOnMouseClicked(mouseListener);
+        imgDie5.setOnMouseClicked(mouseListener);
+
     }
+
+
 
     /**
      * Handle the pressing of the roll button.
@@ -147,11 +185,12 @@ public class GameController {
      * @param actionEvent the action event of pressing the roll button
      */
     public void handleRoll(ActionEvent actionEvent) {
-
+        //should call game field -> player -> roll e.g. game.roll(Character.CHAR1); and then updates the images 
+        //for each of the die faces. 
     }
 
 
-    /**
+    /*
     public void handleTemp(ActionEvent actionEvent) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Finish.fxml"));
         Stage stage = new Stage();
