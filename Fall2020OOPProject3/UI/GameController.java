@@ -4,21 +4,17 @@ import Fall2020OOPProject3.Player;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
-import javax.xml.soap.Text;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -127,34 +123,42 @@ public class GameController {
 
     //private int bots;
     private ArrayList<Player> players = new ArrayList<Player>();
-    private static final String tableURL = "/Fall2020OOPProject3/UI/table.jpg";
-    private static final String tempURL = "/Fall2020OOPProject3/UI/temp.png";
-    private static final String noneURL = "/Fall2020OOPProject3/UI/none.png";
 
+    // ImagePatterns for filling
+    private static final ImagePattern imgpatTemp = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/temp.png"));
+    private static final ImagePattern imgpatTable = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/table.jpg"));
+    private static final ImagePattern imgpatNone = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/none.png"));
+    private static final ImagePattern imgpatArrow = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/arrow.png"));
 
+    /**
+     * Initialize the Game.fxml stage
+     *
+     * @param b the number of bots with which to start the game
+     */
     public void init(int b) {
-        //this.bots = b;
-        for (int i = 0; i < b; i++) {
+        /*
+            set up "Players" tab of "Game.fxml"
+                Fill character cards
+                Fill Arrows
+                Fill table
+         */
+        Rectangle[] rectChars = {this.rectPlayer, this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
+        // assign characters
+        for (int i = 0; i < b+1; i++) {
             int pickChar = new Random().nextInt(Player.Character.values().length);
             int pickRole = new Random().nextInt(Player.Role.values().length);
             players.add(new Player(Player.Character.values()[pickChar], Player.Role.values()[pickRole]));
+            rectChars[i].setFill(new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/" + Player.Character.values()[pickChar].toString() + ".png")));
         }
-        Image temp = new Image(tempURL);
-        Image table = new Image(tableURL);
-        Image none = new Image(noneURL);
-
-        rectPlayer.setFill(new ImagePattern(temp));
-        polyOct.setFill(new ImagePattern(table));
-
-        // set fill for bot seats
-        Rectangle[] rectChars = {this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
-        for (int i = 0; i < players.size(); i++) {
-            rectChars[i].setFill(new ImagePattern(temp));
-        }
+        // set fill for table
+        this.polyOct.setFill(imgpatTable);
         // set fill for non-player or non-bot seats
         for (int i = players.size(); i < rectChars.length; i++) {
-            rectChars[i].setFill(new ImagePattern(none));
+            rectChars[i].setFill(imgpatNone);
+            rectChars[i].setStroke(Color.TRANSPARENT);
         }
+        updArrows();
+
 
         /*
          * Assign lambda listeners for each image which set let the player toggle their locked/unlocked state
@@ -174,10 +178,36 @@ public class GameController {
         imgDie3.setOnMouseClicked(mouseListener);
         imgDie4.setOnMouseClicked(mouseListener);
         imgDie5.setOnMouseClicked(mouseListener);
-
     }
 
+    /**
+     * Update arrow art to reflect the number of arrows held by each player or bot
+     *
+     */
+    private void updArrows() {
+        Circle[] play = {this.circPlayer1, this.circPlayer2, this.circPlayer3, this.circPlayer4, this.circPlayer5, this.circPlayer6, this.circPlayer7, this.circPlayer8, this.circPlayer9};
+        Circle[] bot1 = {this.circBot11, this.circBot12, this.circBot13, this.circBot14, this.circBot15, this.circBot16, this.circBot17, this.circBot18, this.circBot19};
+        Circle[] bot2 = {this.circBot21, this.circBot22, this.circBot23, this.circBot24, this.circBot25, this.circBot26, this.circBot27, this.circBot28, this.circBot29};
+        Circle[] bot3 = {this.circBot31, this.circBot32, this.circBot33, this.circBot34, this.circBot35, this.circBot36, this.circBot37, this.circBot38, this.circBot39};
+        Circle[] bot4 = {this.circBot41, this.circBot42, this.circBot43, this.circBot44, this.circBot45, this.circBot46, this.circBot47, this.circBot48, this.circBot49};
+        Circle[] bot5 = {this.circBot51, this.circBot52, this.circBot53, this.circBot54, this.circBot55, this.circBot56, this.circBot57, this.circBot58, this.circBot59};
+        Circle[] bot6 = {this.circBot61, this.circBot62, this.circBot63, this.circBot64, this.circBot65, this.circBot66, this.circBot67, this.circBot68, this.circBot69};
+        Circle[] bot7 = {this.circBot71, this.circBot72, this.circBot73, this.circBot74, this.circBot75, this.circBot76, this.circBot77, this.circBot78, this.circBot79};
+        Circle[][] arrows = {play, bot1, bot2, bot3, bot4, bot5, bot6, bot7};
 
+        // set fill to none for all arrows
+        for (int i = 0; i < arrows.length; i++) {
+            for (int j = 0; j < arrows[i].length; j++) {
+                arrows[i][j].setFill(imgpatNone);
+            }
+        }
+        // set fill to arrow for all arrows which exist
+        for (int i = 0; i < this.players.size(); i++) {
+            for (int j = 0; j < this.players.get(i).getCurrentArrows(); j++) {
+                arrows[i][j].setFill(imgpatArrow);
+            }
+        }
+    }
 
     /**
      * Handle the pressing of the roll button.
