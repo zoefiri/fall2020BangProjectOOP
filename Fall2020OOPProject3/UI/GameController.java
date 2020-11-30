@@ -122,7 +122,11 @@ public class GameController {
     public TableView discoveredRolesTable;
 
     //private int bots;
+<<<<<<< HEAD
     // private ArrayList<Player> players = new ArrayList<Player>();
+=======
+    private ArrayList<Player> players = new ArrayList<Player>();
+>>>>>>> 2d1ffa72e39fe4e90cdf7a171d3a26e9166dda78
 
     // ImagePatterns for filling
     private static final ImagePattern imgpatTemp = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/temp.png"));
@@ -144,15 +148,21 @@ public class GameController {
          */
         Rectangle[] rectChars = {this.rectPlayer, this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
         // assign characters
+<<<<<<< HEAD
         /*
+=======
+>>>>>>> 2d1ffa72e39fe4e90cdf7a171d3a26e9166dda78
         for (int i = 0; i < b+1; i++) {
             int pickChar = new Random().nextInt(Player.Character.values().length);
             int pickRole = new Random().nextInt(Player.Role.values().length);
             players.add(new Player(Player.Character.values()[pickChar], Player.Role.values()[pickRole]));
             rectChars[i].setFill(new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/" + Player.Character.values()[pickChar].toString() + ".png")));
         }
+<<<<<<< HEAD
         */
 
+=======
+>>>>>>> 2d1ffa72e39fe4e90cdf7a171d3a26e9166dda78
         // set fill for table
         this.polyOct.setFill(imgpatTable);
         // set fill for non-player or non-bot seats
