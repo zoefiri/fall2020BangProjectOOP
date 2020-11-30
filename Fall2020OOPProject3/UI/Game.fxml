@@ -10,30 +10,30 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fall2020OOPProject3.UI.GameController">
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Players">
+         <tabs>
+            <Tab text="Players">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                   <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Circle fx:id="circBot43" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circBot43" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circBot42" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circBot42" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circBot41" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circBot41" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
@@ -42,17 +42,17 @@
                                           </HBox>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Circle fx:id="circBot46" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circBot46" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circBot45" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circBot45" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circBot44" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circBot44" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
@@ -61,17 +61,17 @@
                                           </HBox>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Circle fx:id="circBot49" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circBot49" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circBot48" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circBot48" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circBot47" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circBot47" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
@@ -83,39 +83,39 @@
                                           <Insets right="10.0" />
                                        </HBox.margin>
                                     </VBox>
-                                       <Rectangle fx:id="rectBot4" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
-                                           <HBox.margin>
-                                               <Insets left="10.0" />
-                                           </HBox.margin>
-                                           <VBox.margin>
-                                               <Insets />
-                                           </VBox.margin></Rectangle>
-                                   </children>
-                                   <padding>
-                                       <Insets bottom="50.0" />
-                                   </padding>
-                               </HBox>
-                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                   <children>
-                                       <VBox alignment="CENTER" layoutX="1290.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-                                           <children>
-                                               <HBox prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
+                                    <Rectangle fx:id="rectBot4" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="94.0" stroke="BLACK" strokeType="INSIDE" width="360.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin></Rectangle>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="50.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="CENTER" layoutX="1290.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
                                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                                    <children>
                                                       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot37" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot37" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot38" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot38" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot39" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot39" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -124,17 +124,17 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot34" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot34" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot35" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot35" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot36" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot36" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -143,17 +143,17 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot31" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot31" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot32" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot32" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot33" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot33" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -165,104 +165,32 @@
                                                       <Insets right="10.0" />
                                                    </HBox.margin>
                                                 </VBox>
-                                                       <Rectangle fx:id="rectBot3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
-                                                           <HBox.margin>
-                                                               <Insets left="10.0" />
-                                                           </HBox.margin></Rectangle>
-                                                   </children>
-                                                   <VBox.margin>
-                                                       <Insets bottom="100.0" />
-                                                   </VBox.margin>
-                                               </HBox>
-                                               <HBox layoutX="10.0" layoutY="580.0" prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                <VBox prefHeight="200.0" prefWidth="100.0">
-                                                   <children>
-                                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                                         <children>
-                                                            <Circle fx:id="circBot27" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                               <HBox.margin>
-                                                                  <Insets left="5.0" right="5.0" />
-                                                               </HBox.margin>
-                                                            </Circle>
-                                                            <Circle fx:id="circBot28" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                               <HBox.margin>
-                                                                  <Insets left="5.0" right="5.0" />
-                                                               </HBox.margin>
-                                                            </Circle>
-                                                            <Circle fx:id="circBot29" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                               <HBox.margin>
-                                                                  <Insets left="5.0" right="5.0" />
-                                                               </HBox.margin>
-                                                            </Circle>
-                                                         </children>
-                                                      </HBox>
-                                                      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
-                                                         <children>
-                                                            <Circle fx:id="circBot24" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                               <HBox.margin>
-                                                                  <Insets left="5.0" right="5.0" />
-                                                               </HBox.margin>
-                                                            </Circle>
-                                                            <Circle fx:id="circBot25" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                               <HBox.margin>
-                                                                  <Insets left="5.0" right="5.0" />
-                                                               </HBox.margin>
-                                                            </Circle>
-                                                            <Circle fx:id="circBot26" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                               <HBox.margin>
-                                                                  <Insets left="5.0" right="5.0" />
-                                                               </HBox.margin>
-                                                            </Circle>
-                                                         </children>
-                                                      </HBox>
-                                                      <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0">
-                                                         <children>
-                                                            <Circle fx:id="circBot21" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                               <HBox.margin>
-                                                                  <Insets left="5.0" right="5.0" />
-                                                               </HBox.margin>
-                                                            </Circle>
-                                                            <Circle fx:id="circBot22" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                               <HBox.margin>
-                                                                  <Insets left="5.0" right="5.0" />
-                                                               </HBox.margin>
-                                                            </Circle>
-                                                            <Circle fx:id="circBot23" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                               <HBox.margin>
-                                                                  <Insets left="5.0" right="5.0" />
-                                                               </HBox.margin>
-                                                            </Circle>
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                   <HBox.margin>
-                                                      <Insets right="10.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                                       <Rectangle fx:id="rectBot2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
+                                                <Rectangle fx:id="rectBot3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="94.0" stroke="BLACK" strokeType="INSIDE" width="360.0">
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin></Rectangle>
-                                                   </children>
-                                               </HBox>
-                                               <HBox layoutX="10.0" layoutY="580.0" prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="100.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="580.0" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
                                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                                    <children>
                                                       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot17" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot27" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot18" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot28" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot19" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot29" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -271,17 +199,17 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot14" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot24" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot15" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot25" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot16" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot26" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -290,17 +218,17 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot11" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot21" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot12" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot22" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot13" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot23" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -312,52 +240,124 @@
                                                       <Insets right="10.0" />
                                                    </HBox.margin>
                                                 </VBox>
-                                                       <Rectangle fx:id="rectBot1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
+                                                <Rectangle fx:id="rectBot2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="94.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="360.0">
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin></Rectangle>
+                                             </children>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="580.0" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Circle fx:id="circBot17" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                            <Circle fx:id="circBot18" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                            <Circle fx:id="circBot19" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Circle fx:id="circBot14" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                            <Circle fx:id="circBot15" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                            <Circle fx:id="circBot16" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Circle fx:id="circBot11" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                            <Circle fx:id="circBot12" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                            <Circle fx:id="circBot13" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                         </children>
+                                                      </HBox>
                                                    </children>
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </VBox>
+                                                <Rectangle fx:id="rectBot1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="94.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="360.0">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin></Rectangle>
+                                             </children>
                                              <VBox.margin>
                                                 <Insets top="100.0" />
                                              </VBox.margin>
-                                               </HBox>
-                                           </children>
-                                           <HBox.margin>
-                                               <Insets right="50.0" />
-                                           </HBox.margin>
-                                       </VBox>
-                                       <Polygon fx:id="polyOct" fill="#1f93ff00" stroke="BLACK" strokeType="INSIDE">
-                                           <points>
-                                               <Double fx:value="115" />
-                                               <Double fx:value="-277" />
+                                          </HBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <Polygon fx:id="polyOct" fill="#1f93ff00" stroke="BLACK" strokeType="INSIDE">
+                                       <points>
+                                          <Double fx:value="115" />
+                                          <Double fx:value="-277" />
 
-                                               <Double fx:value="-115" />
-                                               <Double fx:value="-277" />
+                                          <Double fx:value="-115" />
+                                          <Double fx:value="-277" />
 
-                                               <Double fx:value="-277" />
-                                               <Double fx:value="-115" />
+                                          <Double fx:value="-277" />
+                                          <Double fx:value="-115" />
 
-                                               <Double fx:value="-277" />
-                                               <Double fx:value="115" />
+                                          <Double fx:value="-277" />
+                                          <Double fx:value="115" />
 
-                                               <Double fx:value="-115" />
-                                               <Double fx:value="277" />
+                                          <Double fx:value="-115" />
+                                          <Double fx:value="277" />
 
-                                               <Double fx:value="115" />
-                                               <Double fx:value="277" />
+                                          <Double fx:value="115" />
+                                          <Double fx:value="277" />
 
-                                               <Double fx:value="277" />
-                                               <Double fx:value="115" />
+                                          <Double fx:value="277" />
+                                          <Double fx:value="115" />
 
-                                               <Double fx:value="277" />
-                                               <Double fx:value="-115" />
-                                           </points>
-                                       </Polygon>
-                                       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                                           <children>
-                                               <HBox prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                       <Rectangle fx:id="rectBot5" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
+                                          <Double fx:value="277" />
+                                          <Double fx:value="-115" />
+                                       </points>
+                                    </Polygon>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Rectangle fx:id="rectBot5" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="94.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="360.0">
                                                    <HBox.margin>
                                                       <Insets right="10.0" />
                                                    </HBox.margin></Rectangle>
@@ -365,17 +365,17 @@
                                                    <children>
                                                       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot57" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot57" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot58" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot58" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot59" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot59" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -384,17 +384,17 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot54" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot54" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot55" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot55" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot56" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot56" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -403,17 +403,17 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot51" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot51" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot52" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot52" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot53" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot53" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -425,14 +425,14 @@
                                                       <Insets left="10.0" />
                                                    </padding>
                                                 </VBox>
-                                                   </children>
+                                             </children>
                                              <VBox.margin>
                                                 <Insets bottom="100.0" />
                                              </VBox.margin>
-                                               </HBox>
-                                               <HBox layoutX="60.0" layoutY="580.0" prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                       <Rectangle fx:id="rectBot6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
+                                          </HBox>
+                                          <HBox layoutX="60.0" layoutY="580.0" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Rectangle fx:id="rectBot6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="94.0" stroke="BLACK" strokeType="INSIDE" width="360.0">
                                                    <HBox.margin>
                                                       <Insets right="10.0" />
                                                    </HBox.margin></Rectangle>
@@ -440,17 +440,17 @@
                                                    <children>
                                                       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot67" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot67" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot68" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot68" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot69" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot69" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -459,17 +459,17 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot64" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot64" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot65" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot65" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot66" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot66" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -478,17 +478,17 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot61" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot61" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot62" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot62" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot63" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot63" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -500,11 +500,11 @@
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
                                                 </VBox>
-                                                   </children>
-                                               </HBox>
-                                               <HBox layoutX="60.0" layoutY="580.0" prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                       <Rectangle fx:id="rectBot7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
+                                             </children>
+                                          </HBox>
+                                          <HBox layoutX="60.0" layoutY="580.0" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Rectangle fx:id="rectBot7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="94.0" stroke="BLACK" strokeType="INSIDE" width="360.0">
                                                    <HBox.margin>
                                                       <Insets right="10.0" />
                                                    </HBox.margin></Rectangle>
@@ -512,17 +512,17 @@
                                                    <children>
                                                       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot77" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot77" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot78" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot78" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot79" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot79" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -531,17 +531,17 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot74" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot74" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot75" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot75" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot76" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot76" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -550,17 +550,17 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Circle fx:id="circBot71" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot71" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot72" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot72" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
                                                             </Circle>
-                                                            <Circle fx:id="circBot73" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                            <Circle fx:id="circBot73" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                                <HBox.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </HBox.margin>
@@ -572,21 +572,21 @@
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
                                                 </VBox>
-                                                   </children>
+                                             </children>
                                              <VBox.margin>
                                                 <Insets top="100.0" />
                                              </VBox.margin>
-                                               </HBox>
-                                           </children>
-                                           <padding>
-                                               <Insets left="50.0" />
-                                           </padding>
-                                       </VBox>
-                                   </children>
-                               </HBox>
-                                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                           <Rectangle fx:id="rectPlayer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="920.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets left="50.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="rectPlayer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="94.0" layoutX="920.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="360.0">
                                        <HBox.margin>
                                           <Insets right="10.0" />
                                        </HBox.margin></Rectangle>
@@ -594,17 +594,17 @@
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Circle fx:id="circPlayer7" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circPlayer7" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circPlayer8" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circPlayer8" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circPlayer9" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circPlayer9" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
@@ -613,17 +613,17 @@
                                           </HBox>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Circle fx:id="circPlayer4" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circPlayer4" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circPlayer5" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circPlayer5" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circPlayer6" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circPlayer6" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
@@ -632,17 +632,17 @@
                                           </HBox>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Circle fx:id="circPlayer1" fill="#1f93ff00" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circPlayer1" fill="#1f93ff00" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circPlayer2" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circPlayer2" fill="#1f93ff00" layoutX="20.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Circle fx:id="circPlayer3" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="circPlayer3" fill="#1f93ff00" layoutX="40.0" layoutY="20.0" radius="12.5" stroke="TRANSPARENT" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
@@ -654,57 +654,57 @@
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </VBox>
-                                       </children>
-                                       <VBox.margin>
-                                           <Insets />
-                                       </VBox.margin>
-                                       <padding>
-                                           <Insets top="50.0" />
-                                       </padding>
-                                   </HBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets top="50.0" />
+                                 </padding>
+                              </HBox>
                            </children>
                         </VBox>
                      </children></AnchorPane>
                </content></Tab>
-          <Tab text="Roll">
+            <Tab text="Roll">
                <content>
                   <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="119.0" minHeight="2.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="246.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="119.0" minHeight="2.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="246.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="246.0" minHeight="10.0" prefHeight="226.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                     </rowConstraints>
                      <children>
-                        <ImageView fitHeight="119.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <ImageView fx:id="imgDie1" fitHeight="119.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@/Fall2020OOPProject3/UI/table.jpg" />
+                              <Image url="@art/none.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="120.0" fitWidth="121.0" layoutX="10.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <ImageView fx:id="imgDie2" fitHeight="120.0" fitWidth="121.0" layoutX="10.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@/Fall2020OOPProject3/UI/table.jpg" />
+                              <Image url="@art/none.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="120.0" fitWidth="127.0" layoutX="130.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <ImageView fx:id="imgDie3" fitHeight="120.0" fitWidth="127.0" layoutX="130.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@/Fall2020OOPProject3/UI/table.jpg" />
+                              <Image url="@art/none.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="121.0" fitWidth="122.0" layoutX="250.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <ImageView fx:id="imgDie4" fitHeight="121.0" fitWidth="122.0" layoutX="250.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@/Fall2020OOPProject3/UI/table.jpg" />
+                              <Image url="@art/none.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="117.0" fitWidth="123.0" layoutX="370.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <ImageView fx:id="imgDie5" fitHeight="117.0" fitWidth="123.0" layoutX="370.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@/Fall2020OOPProject3/UI/table.jpg" />
+                              <Image url="@art/none.png" />
                            </image>
                         </ImageView>
                         <Button fx:id="btnRoll" alignment="CENTER" mnemonicParsing="false" onAction="#handleRoll" prefHeight="46.0" prefWidth="115.0" text="Roll Unlocked Dice" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -715,8 +715,22 @@
                      </children>
                   </GridPane>
                </content>
-          </Tab>
-        </tabs>
+            </Tab>
+            <Tab text="Discovered Roles">
+               <content>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="discoveredRolesTable" prefHeight="200.0" prefWidth="200.0">
+                           <columns>
+                              <TableColumn prefWidth="554.9999694824219" text="Character" />
+                              <TableColumn minWidth="0.0" prefWidth="1345.0000305175781" text="Role" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </StackPane>
+               </content>
+            </Tab>
+         </tabs>
       </TabPane>
    </center>
 </BorderPane>
