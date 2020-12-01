@@ -18,13 +18,14 @@ public class Game {
 
     public Game(int bots, boolean expansion1, boolean expansion2) {
         rand = new Random();
+        numPlayers = bots + 1;
         List<Player.Character> allChars = Arrays.asList(Player.Character.values());
         Collections.shuffle(allChars, rand);
         
-        List<Player.Role> allRoles = Arrays.asList(getRolesForGame(bots + 1));
+        List<Player.Role> allRoles = Arrays.asList(getRolesForGame(numPlayers));
         Collections.shuffle(allRoles, rand);
 
-        for (int i = 0; i < bots+1; i++) {
+        for (int i = 0; i < numPlayers; i++) {
             players.add(new Player(allChars.get(i), allRoles.get(i)));
         }
 

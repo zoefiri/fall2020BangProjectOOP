@@ -9,8 +9,8 @@ public class ComPlayer extends Player{
 	private Random rand;
 
 	public ComPlayer(Character character, Role role) {
-		rand = new Random();
 		super(character, role);
+		rand = new Random();
 	}
 
 	public void takeTurn(DiceSet dice) {

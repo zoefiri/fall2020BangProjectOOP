@@ -31,7 +31,7 @@ public abstract class Die{
 	Face currentFace;
 
 	public Face roll(){
-		if (locked) return NULL;
+		if (locked) return currentFace;
 		currentFace = getPossibleFaces()[rand.nextInt(getPossibleFaces().length)];
 		unlockable = currentFace != Face.DYNAMITE;
 		return currentFace;
