@@ -1,7 +1,5 @@
 package Fall2020OOPProject3;
 
-import javax.lang.model.element.Element;
-
 public class Player {
 
 	public enum Character {
@@ -22,11 +20,11 @@ public class Player {
 		RENEGADE
 	}
 
-	private int hp;
-	private int arrows;
-	private Character character;
-	private Role role;
-	private boolean elimiated;
+	protected int hp;
+	protected int arrows;
+	protected Character character;
+	protected Role role;
+	protected boolean elimiated;
 
 	public Player(Character character, Role role) {
 		this.character = character;
