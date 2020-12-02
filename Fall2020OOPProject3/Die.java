@@ -34,6 +34,7 @@ public abstract class Die{
 		if (locked) return currentFace;
 		currentFace = getPossibleFaces()[rand.nextInt(getPossibleFaces().length)];
 		unlockable = currentFace != Face.DYNAMITE;
+		locked = currentFace == Face.DYNAMITE;
 		return currentFace;
 	}
 

@@ -3,34 +3,61 @@ package Fall2020OOPProject3;
 public class Player {
 
 	public enum Character {
-		SUZY_LAFAYETTE,
-		PAUL_REGRET,
-		VULTURE_SAM,
-		LUCKY_DUKE,
-		JOURDONNAIS,
-		CALAMITY_JANET,
-		BLACK_JACK,
-		ROSE_DOOLAN
+		SUZY_LAFAYETTE("Suzy Lafayette"),
+		PAUL_REGRET("Paul Regret"),
+		VULTURE_SAM("Vulture Sam"),
+		LUCKY_DUKE("Lucky Duke"),
+		JOURDONNAIS("Jourdonnais"),
+		CALAMITY_JANET("Calamity Janet"),
+		BLACK_JACK("Black Jack"),
+		ROSE_DOOLAN("Rose Doolan");
+
+		private String name;
+		
+		private Character(String s) {
+			name = s;
+		}
+
+		public String toString() {
+			return name;
+		}
 	}
 
 	public enum Role {
-		SHERRIF,
-		DEPUTY,
-		OUTLAW,
-		RENEGADE
+		SHERRIF("Sherrif"),
+		DEPUTY("Deputy"),
+		OUTLAW("Outlaw"),
+		RENEGADE("Renegade");
+
+		private String name;
+		
+		private Role(String s) {
+			name = s;
+		}
+
+		public String toString() {
+			return name;
+		}
 	}
 
 	protected int hp;
 	protected int arrows;
+	protected int seatPosition;
 	protected Character character;
 	protected Role role;
 	protected boolean elimiated;
 
-	public Player(Character character, Role role) {
+	public Player(Character character, Role role, int seat) {
 		this.character = character;
 		this.role = role;
 		this.arrows = 0;
 		this.hp = getMaxHPOfCharacter(character);
+		this.seatPosition = seat;
+	}
+
+	public void shootPlayer(Player player) {
+		player.removeHP(1);
+		System.out.println(character + " shot at " + player.getCharacter());
 	}
 
 	public int indianAttack() {
@@ -54,6 +81,14 @@ public class Player {
 		hp -= hit;
 		elimiated = hp <= 0;
 		return hp;
+	}
+
+	public int getSeatPosition() {
+		return seatPosition;
+	}
+
+	public void setSeatPosition(int seat) {
+		seatPosition = seat;
 	}
 
 	public Role getRole() {
