@@ -135,6 +135,10 @@ public class Game {
             }
             turnEnd = numDynamite >= 3;
         }
+        if (numDynamite >= 3) {
+            System.out.println("Dynamite blew up in " + player + "'s face!");
+            player.removeHP(1);
+        }
         for (Face f : getDiceFaces()) {
             if (f == Face.SHOOT1) {
                 if(player.getCharacter() == Character.CALAMITY_JANET) {
@@ -177,6 +181,7 @@ public class Game {
         for(Face f : getDiceFaces()) {
             if (f == Face.BEER) {
                 player.addHP(1);
+                System.out.println(player + " healed themself");
             }
         }
 
@@ -188,6 +193,7 @@ public class Game {
         }
 
         if (numGat >= 3) {
+            System.out.println(player + " fired the gatling gun");
             for (Player p : players) {
                 if (p != player) {
                     p.removeHP(1);

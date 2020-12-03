@@ -131,5 +131,9 @@ public class Player {
 		}
 		return -1; //needs explicit return statement or default case
 	} 
+
+	public String toString() {
+		return character.toString();
+	}
 	
 }
