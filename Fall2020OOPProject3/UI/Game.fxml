@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import java.lang.Double?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fall2020OOPProject3.UI.GameController">
    <center>
@@ -716,13 +730,14 @@
                   </GridPane>
                </content>
             </Tab>
-            <Tab text="Discovered Roles">
+            <Tab text="Roles and Details">
                <content>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="discoveredRolesTable" prefHeight="200.0" prefWidth="200.0">
                            <columns>
-                              <TableColumn prefWidth="554.9999694824219" text="Character" />
+                              <TableColumn minWidth="200.0" prefWidth="200.0" text="Character" />
+                              <TableColumn minWidth="60.0" prefWidth="60.0" text="Health" />
                               <TableColumn minWidth="0.0" prefWidth="1345.0000305175781" text="Role" />
                            </columns>
                         </TableView>

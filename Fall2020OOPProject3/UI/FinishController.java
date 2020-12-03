@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 
@@ -11,6 +12,8 @@ public class FinishController {
     public Button btnQuit;
     public Button btnGo;
     public Slider sliderBots;
+    public CheckBox cbExpOS;
+    public CheckBox cbExpUoA;
 
     public void handleQuit(ActionEvent actionEvent) {
         ((Stage)btnQuit.getScene().getWindow()).close();
@@ -22,7 +25,7 @@ public class FinishController {
         stage.setScene(new Scene(loader.load()));
         stage.setTitle("Bang! The Dice Game");
         GameController gc = loader.getController();
-        gc.init((int)sliderBots.getValue());
+        gc.init((int)sliderBots.getValue(), cbExpOS.isSelected(), cbExpUoA.isSelected());
         stage.show();
         ((Stage)btnQuit.getScene().getWindow()).close();
     }

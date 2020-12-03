@@ -207,7 +207,6 @@ public class Game {
         }
 	}
 
-
     private static Role[] getRolesForGame(int numPlayers) {
         switch(numPlayers) {
             case 3: return new Role[] {Role.DEPUTY, Role.OUTLAW, Role.RENEGADE};

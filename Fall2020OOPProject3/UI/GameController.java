@@ -1,7 +1,10 @@
 package Fall2020OOPProject3.UI;
 
-import Fall2020OOPProject3.Player;
+import Fall2020OOPProject3.Game;
 
+import Fall2020OOPProject3.Player;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -15,8 +18,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
-import java.util.ArrayList;
-import java.util.Random;
 
 public class GameController {
     public Rectangle rectPlayer;
@@ -121,47 +122,28 @@ public class GameController {
     public Button btnRoll;
     public TableView discoveredRolesTable;
 
-    //private int bots;
-    // private ArrayList<Player> players = new ArrayList<Player>();
+    // Game instance
+    private Game game;
 
     // ImagePatterns for filling
-    private static final ImagePattern imgpatTemp = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/temp.png"));
     private static final ImagePattern imgpatTable = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/table.jpg"));
     private static final ImagePattern imgpatNone = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/none.png"));
     private static final ImagePattern imgpatArrow = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/arrow.png"));
+    private static final ImagePattern imgpatDead = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/dead.png"));
+
 
     /**
      * Initialize the Game.fxml stage
      *
-     * @param b the number of bots with which to start the game
+     * @param bots the number of bots with which to start the game
+     * @param exp1 Old Saloon expansion enabled
+     * @param exp2 Undead or Alive expansion enabled
      */
-    public void init(int b) {
-        /*
-            set up "Players" tab of "Game.fxml"
-                Fill character cards
-                Fill Arrows
-                Fill table
-         */
-        Rectangle[] rectChars = {this.rectPlayer, this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
-        // assign characters
-        /*
-        for (int i = 0; i < b+1; i++) {
-            int pickChar = new Random().nextInt(Player.Character.values().length);
-            int pickRole = new Random().nextInt(Player.Role.values().length);
-            players.add(new Player(Player.Character.values()[pickChar], Player.Role.values()[pickRole]));
-            rectChars[i].setFill(new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/" + Player.Character.values()[pickChar].toString() + ".png")));
-        }
-        */
-
-        // set fill for table
-        this.polyOct.setFill(imgpatTable);
-        // set fill for non-player or non-bot seats
-        for (int i = players.size(); i < rectChars.length; i++) {
-            rectChars[i].setFill(imgpatNone);
-            rectChars[i].setStroke(Color.TRANSPARENT);
-        }
-        updArrows();
-
+    public void init(int bots, boolean exp1, boolean exp2) {
+        game = new Game(bots, exp1, exp2);      // set up game
+        polyOct.setFill(imgpatTable);           // set up table
+        updPlayers();                           // set up player character cards
+        updArrows();                            // set up arrows
 
         /*
          * Assign lambda listeners for each image which set let the player toggle their locked/unlocked state
@@ -184,6 +166,29 @@ public class GameController {
     }
 
     /**
+     * Update player art to reflect players still alive
+     *
+     */
+    private void updPlayers() {
+        Rectangle[] rectChars = {this.rectPlayer, this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
+        //ObservableList<Player> data = FXCollections.observableArrayList();
+
+        for (int i = 0; i < game.players.size(); i++) {
+            if (game.players.get(i).isEliminated())
+                rectChars[i].setFill(imgpatDead);
+            else {
+                rectChars[i].setFill(new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/" + game.players.get(i).getCharacter().toString() + ".png")));
+            }
+            //data.add(game.players.get(i));
+        }
+        for (int i = game.players.size(); i < rectChars.length; i++) {
+            rectChars[i].setFill(imgpatNone);
+            rectChars[i].setStroke(Color.TRANSPARENT);
+        }
+        //discoveredRolesTable.setItems(data); //.addAll(game.players.get(i).getCharacter().toString(), game.players.get(i).getCurrentHP(), game.players.get(i).getRole());
+    }
+
+    /**
      * Update arrow art to reflect the number of arrows held by each player or bot
      *
      */
@@ -199,14 +204,13 @@ public class GameController {
         Circle[][] arrows = {play, bot1, bot2, bot3, bot4, bot5, bot6, bot7};
 
         // set fill to none for all arrows
-        for (int i = 0; i < arrows.length; i++) {
-            for (int j = 0; j < arrows[i].length; j++) {
-                arrows[i][j].setFill(imgpatNone);
-            }
-        }
+        for (Circle[] arrow : arrows)
+            for (Circle circle : arrow)
+                circle.setFill(imgpatNone);
+
         // set fill to arrow for all arrows which exist
-        for (int i = 0; i < this.players.size(); i++) {
-            for (int j = 0; j < this.players.get(i).getCurrentArrows(); j++) {
+        for (int i = 0; i < game.players.size(); i++) {
+            for (int j = 0; j < game.players.get(i).getCurrentArrows(); j++) {
                 arrows[i][j].setFill(imgpatArrow);
             }
         }
@@ -223,7 +227,7 @@ public class GameController {
     }
 
 
-    /*
+    /*  USED TO LOAD FINAL
     public void handleTemp(ActionEvent actionEvent) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Finish.fxml"));
         Stage stage = new Stage();

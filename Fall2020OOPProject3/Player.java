@@ -45,7 +45,7 @@ public class Player {
 	protected int seatPosition;
 	protected Character character;
 	protected Role role;
-	protected boolean elimiated;
+	protected boolean eliminated;
 
 	public Player(Character character, Role role, int seat) {
 		this.character = character;
@@ -79,7 +79,7 @@ public class Player {
 
 	public int removeHP(int hit) {
 		hp -= hit;
-		elimiated = hp <= 0;
+		eliminated = hp <= 0;
 		return hp;
 	}
 
@@ -112,7 +112,7 @@ public class Player {
 	}
 
 	public boolean isEliminated() {
-		return elimiated;
+		return eliminated;
 	}
 
 	public static int getMaxHPOfCharacter(Character character) {
