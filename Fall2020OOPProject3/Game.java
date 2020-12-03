@@ -68,6 +68,10 @@ public class Game {
 
     }
 
+    
+    /** 
+     * @return Face[] An array of the current faces on the dice being used.
+     */
     public Face[] getDiceFaces() {
         Face[] out = new Face[numDice];
         for (int i = 0; i < numDice; i++) {
@@ -76,6 +80,11 @@ public class Game {
         return out;
     }
 
+    
+    /** 
+     * @param diceToRoll A boolean array of which dice the roll. For example, {True, False, False, False, False} will only roll the first die.
+     * @param player The Player that is rolling the dice.
+     */
     public void rollDice(boolean[] diceToRoll, Player player) {
         if (diceToRoll.length < numDice) {
             System.out.println("Error in DiceSet.roll: diceToRoll is too short, need at least " + numDice + " values");
@@ -92,6 +101,13 @@ public class Game {
         System.out.println();
     }
 
+    
+    /** 
+     * @param diceToRoll A boolean array of which dice the roll. For example, {True, False, False, False, False} will only roll the first die.
+     * @param player The Player that is rolling the dice.
+     * @param useLoudmouth Whether or not to use the Loudmouth die.
+     * @param useCoward Whether or not to use the Coward die.
+     */
     public void rollDice(boolean[] diceToRoll, Player player, boolean useLoudmouth, boolean useCoward) {
         if (!useExpansion1 && (useCoward || useLoudmouth)) System.out.println("Error: rollDice() was called with useLoudmouth or useCoward without expansion 1 enabled");
         if (diceToRoll.length < numDice) {
@@ -102,6 +118,10 @@ public class Game {
         }
     }
 
+    
+    /** 
+     * @param p The player that is taking an arrow.
+     */
     public void takeArrow(Player p) {
         p.addArrow();
         System.out.println(p.getCharacter() + " took an arrow");
@@ -114,6 +134,10 @@ public class Game {
         }
     }
 
+    
+    /** 
+     * @param player The player that the computer will take a turn for.
+     */
     public void takeComputerTurn(Player player) {
         boolean turnEnd = false;
         rollDice(new boolean[] {true, true, true, true, true}, player);
@@ -207,6 +231,11 @@ public class Game {
         }
 	}
 
+    
+    /** 
+     * @param numPlayers The number of player to get the role array for.
+     * @return Role[] The Roles appropriate for the number of players.
+     */
     private static Role[] getRolesForGame(int numPlayers) {
         switch(numPlayers) {
             case 3: return new Role[] {Role.DEPUTY, Role.OUTLAW, Role.RENEGADE};
@@ -219,6 +248,10 @@ public class Game {
         }
     }
 
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
         Game game = new Game(5, false, false);
         for (Player p : game.players) {

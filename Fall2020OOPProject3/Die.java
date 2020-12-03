@@ -23,6 +23,10 @@ public abstract class Die{
 		WHISKY
 	};
 
+	
+	/** 
+	 * @return Face[] Returns the possible faces for the implementation of Die.
+	 */
 	protected abstract Face[] getPossibleFaces();
 
 	private boolean locked;
@@ -30,6 +34,10 @@ public abstract class Die{
 
 	Face currentFace;
 
+	
+	/** 
+	 * @return Face The face that was rolled.
+	 */
 	public Face roll(){
 		if (locked) return currentFace;
 		currentFace = getPossibleFaces()[rand.nextInt(getPossibleFaces().length)];
@@ -42,23 +50,43 @@ public abstract class Die{
 		if (unlockable) locked = !locked;
 	}
 
+	
+	/** 
+	 * @param lock 
+	 */
 	public void setLocked(boolean lock) {
 		if (unlockable) locked = lock;
 	}
 
+	
+	/** 
+	 * @return boolean Whether the Die is currently locked, either by the player or by game rules.
+	 */
 	public boolean isLocked() {
 		return locked;
 	}
 
+	
+	/** 
+	 * @return boolean Whether the Die is locked by game rules.
+	 */
 	public boolean isUnlockable() {
 		return unlockable;
 	}
 
+	
+	/** 
+	 * @param unlockable
+	 */
 	public void setUnlockable(boolean unlockable) {
 		this.unlockable = unlockable;
 	}
 		
 
+	
+	/** 
+	 * @return Face Returns the current showing Face of the Die.
+	 */
 	public Face getCurrentFace() {
 		return currentFace;
 	};
