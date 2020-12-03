@@ -28,12 +28,15 @@ public class Game {
 
     private int numArrows;
 
+    private boolean gameOver;
+
     public Game(int bots, boolean expansion1, boolean expansion2) {
         rand = new Random();
         numPlayers = bots + 1;
         dice = new Die[5];
-        this.numDice = 5;
+        numDice = 5;
         numArrows = 9;
+        gameOver = false;
 
         if (expansion2) {
             for (int i = 0; i < 3; i++) {
@@ -162,6 +165,10 @@ public class Game {
         if (numDynamite >= 3) {
             System.out.println("Dynamite blew up in " + player + "'s face!");
             player.removeHP(1);
+            if (player.isEliminated()) {
+                handleElim(player);
+                return;
+            }
         }
         for (Face f : getDiceFaces()) {
             if (f == Face.SHOOT1) {
@@ -172,14 +179,18 @@ public class Game {
                         players.get(Math.floorMod((player.getSeatPosition()-2), numPlayers)), 
                         players.get(Math.floorMod((player.getSeatPosition()+2), numPlayers)) 
                     };
-                    player.shootPlayer(targets[rand.nextInt(4)]);
+                    Player target = targets[rand.nextInt(4)];
+                    player.shootPlayer(target);
+                    if (target.isEliminated()) handleElim(target);
                 }
                 else {
                     Player[] targets = new Player[] {
                         players.get(Math.floorMod((player.getSeatPosition()-1), numPlayers)), 
                         players.get(Math.floorMod((player.getSeatPosition()+1), numPlayers))
                     };
-                    player.shootPlayer(targets[rand.nextInt(2)]);
+                    Player target = targets[rand.nextInt(2)];
+                    player.shootPlayer(target);
+                    if (target.isEliminated()) handleElim(target);
                 }
             }
             if (f == Face.SHOOT2) {
@@ -190,14 +201,18 @@ public class Game {
                         players.get(Math.floorMod((player.getSeatPosition()-2), numPlayers)), 
                         players.get(Math.floorMod((player.getSeatPosition()+2), numPlayers)) 
                     };
-                    player.shootPlayer(targets[rand.nextInt(4)]);
+                    Player target = targets[rand.nextInt(4)];
+                    player.shootPlayer(target);
+                    if (target.isEliminated()) handleElim(target);
                 }
                 else {
                     Player[] targets = new Player[] {
                         players.get(Math.floorMod((player.getSeatPosition()-2), numPlayers)), 
                         players.get(Math.floorMod((player.getSeatPosition()+2), numPlayers)) 
                     };
-                    player.shootPlayer(targets[rand.nextInt(2)]);
+                    Player target = targets[rand.nextInt(2)];
+                    player.shootPlayer(target);
+                    if (target.isEliminated()) handleElim(target);
                 }
             }
         }
@@ -218,9 +233,10 @@ public class Game {
 
         if (numGat >= 3) {
             System.out.println(player + " fired the gatling gun");
-            for (Player p : players) {
-                if (p != player) {
-                    p.removeHP(1);
+            for (int i = 0; i < players.size(); i++) {
+                if (players.get(i) != player) {
+                    players.get(i).removeHP(1);
+                    if (players.get(i).isEliminated()) handleElim(players.get(i));
                 }
             }
         }
@@ -229,7 +245,33 @@ public class Game {
             d.setLocked(false);
             d.setUnlockable(true);
         }
-	}
+    }
+    
+    public void handleElim(Player player) {
+        players.remove(player);
+        numPlayers--;
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).setSeatPosition(i);
+        }
+        System.out.println(player + " Was eliminated! They were a(n) " + player.getRole());
+        if (players.size() <= 1) {
+            gameOver = true;
+        }
+        if (player.getRole() == Role.SHERRIF) {
+            gameOver = true;
+        }
+        if (!areRenegadesOrOutlawsAlive()) {
+            gameOver = true;
+        }
+    }
+
+    public boolean areRenegadesOrOutlawsAlive() {
+        boolean is = false;
+        for (Player p : players) {
+            if (p.getRole() == Role.RENEGADE || p.getRole() == Role.OUTLAW) is = true;
+        }
+        return is;
+    }
 
     
     /** 
@@ -254,10 +296,15 @@ public class Game {
      */
     public static void main(String[] args) {
         Game game = new Game(5, false, false);
+        while (!game.gameOver) {
+            for (int i = 0; i < game.players.size() && !game.gameOver; i++) {
+                System.out.println();
+                System.out.println(game.players.get(i).getCharacter() + "'s turn");
+                game.takeComputerTurn(game.players.get(i));
+            }
+        }
         for (Player p : game.players) {
-            System.out.println();
-            System.out.println(p.getCharacter() + "'s turn");
-            game.takeComputerTurn(p);
+            System.out.println(p + " was a " + p.getRole());
         }
     }
 
