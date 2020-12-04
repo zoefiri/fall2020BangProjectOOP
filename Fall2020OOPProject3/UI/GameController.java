@@ -246,11 +246,13 @@ public class GameController {
         imgDie5.setOnMouseClicked(mouseListener);
 
         endTurnButton.setOnMouseClicked(e -> {
+            updPlayers();
             //TODO player resolve
             for (int i = 1; i < game2.players.size() && !game2.gameOver; i++) {
                 System.out.println();
                 System.out.println(game2.players.get(i).getCharacter() + "'s turn");
                 game2.takeComputerTurn(game2.players.get(i));
+                updPlayers();
             }
             rollCount = 1;
             System.out.println();
