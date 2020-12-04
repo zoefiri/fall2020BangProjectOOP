@@ -132,7 +132,6 @@ public class GameController {
     //Button for rolling from Roll tab
     public Button btnRoll;
     public TextArea historyTextArea;
-<<<<<<< HEAD
     public TableView discoveredRolesTable;
     public TableColumn colCharacter;
     public TableColumn colHealth;
@@ -145,7 +144,6 @@ public class GameController {
     public Button endTurnButton;
 
     // Game instance
-    private Game game;
     private Game game2;
     
     private ColorAdjust black;
@@ -198,13 +196,13 @@ public class GameController {
         updArrows();                            // set up arrows
 
         imgDie = new ImageView[]{imgDie1, imgDie2, imgDie3, imgDie4, imgDie5};
-        
+
         black = new ColorAdjust();
         black.setHue(-1);
         black.setSaturation(.25);
         white = new ColorAdjust();
         white.setHue(0);
-        
+
         /*
          * Assign lambda listeners for each image which set let the player toggle their locked/unlocked state
          * e.g. if(player == activeCharacter && this_die_unlockable) toggleLocked(); or something like this
@@ -216,7 +214,7 @@ public class GameController {
             //ImageView tempDieImageView = (ImageView) e.getSource();
             //tempDieImageView.setImage(new Image("file:src/Fall2020OOPProject3/UI/table.jpg"));
             if (e.getSource() instanceof ImageView) {
-                
+
 
                 Die d = new VanillaDie();
                 /*
@@ -225,8 +223,8 @@ public class GameController {
                 if (e.getSource() == imgDie3) d = game2.dice[2];
                 if (e.getSource() == imgDie4) d = game2.dice[3];
                 if (e.getSource() == imgDie5) d = game2.dice[4];*/
-                for(int i = 0; i < imgDie.length; i++){
-                    if(e.getSource() == imgDie[i]){
+                for (int i = 0; i < imgDie.length; i++) {
+                    if (e.getSource() == imgDie[i]) {
                         d = game2.dice[i];
                         break;
                     }
@@ -246,11 +244,6 @@ public class GameController {
         imgDie3.setOnMouseClicked(mouseListener);
         imgDie4.setOnMouseClicked(mouseListener);
         imgDie5.setOnMouseClicked(mouseListener);
-        /*
-        //Game testing in Log
-        Game game2 = new Game(5, false, false);
-        while (!game2.gameOver) {
-            for (int i = 0; i < game2.players.size() && !game2.gameOver; i++) {
 
         endTurnButton.setOnMouseClicked(e -> {
             //TODO player resolve
@@ -270,6 +263,7 @@ public class GameController {
      * Update Players and Roles and Details tabs to reflect players still alive
      *
      */
+    
     private void updPlayers() {
         Rectangle[] rectChars = {this.rectPlayer, this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
         int j = 0;
