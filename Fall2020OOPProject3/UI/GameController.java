@@ -210,8 +210,6 @@ public class GameController {
 
                 if (d.isLocked()) ((ImageView) e.getSource()).setEffect(black);
                 else ((ImageView) e.getSource()).setEffect(white);
-
-                System.out.println("something is happening!");
             }
 
         };
@@ -225,12 +223,13 @@ public class GameController {
 
         endTurnButton.setOnMouseClicked(e -> {
             //TODO player resolve
-            rollCount = 1;
             for (int i = 1; i < game2.players.size() && !game2.gameOver; i++) {
                 System.out.println();
                 System.out.println(game2.players.get(i).getCharacter() + "'s turn");
                 game2.takeComputerTurn(game2.players.get(i));
             }
+            rollCount = 1;
+            System.out.println();
         });
     }
         
@@ -315,8 +314,9 @@ public class GameController {
 
             game2.rollDice(rolls, game2.players.get(0));
             resolveDice();
+            return;
         }
-        rollCount++;
+        if(rollCount >=1 && rollCount <3 ) rollCount++;
 
         int numDynamite = 0;
         for (Die d : game2.dice) {
@@ -333,6 +333,7 @@ public class GameController {
     }
     
     public void resolveDice(){
+        Player player = game2.players.get(0);
         for(Die d: game2.dice) {
             d.setUnlockable(false);
             d.setLocked(true);
@@ -342,11 +343,77 @@ public class GameController {
             if (d.getCurrentFace() == Die.Face.DYNAMITE) numDynamite++;
         }
         if(numDynamite >= 3) {
-            //take damage as player
+            System.out.println("Dynamite blew up in " + game2.players.get(0) + "'s face!");
+            player.removeHP(1);
+            if (player.isEliminated()) {
+                game2.handleElim(player);
+                return;
+            }
         }
-        //TODO meat
         
-        
+        for(Die.Face f: game2.getDiceFaces()){
+            if (f == Die.Face.SHOOT1) {
+                if(player.getCharacter() == Player.Character.CALAMITY_JANET) {
+                    Player[] targets = new Player[] {
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-1), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+1), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-2), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+2), game2.numPlayers))
+                    };
+                    //TODO player choice, listener
+                }
+                else {
+                    Player[] targets = new Player[] {
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-1), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+1), game2.numPlayers))
+                    };
+                    //TODO player choice, listener
+                }
+            }
+            if (f == Die.Face.SHOOT2) {
+                if(player.getCharacter() == Player.Character.CALAMITY_JANET) {
+                    Player[] targets = new Player[] {
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-1), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+1), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-2), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+2), game2.numPlayers))
+                    };
+                    //TODO player choice, listener
+                }
+                else {
+                    Player[] targets = new Player[] {
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-2), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+2), game2.numPlayers))
+                    };
+                    //TODO player choice, listener
+                }
+            }
+        }
+
+        for(Die.Face f : game2.getDiceFaces()) {
+            if (f == Die.Face.BEER) {
+                player.addHP(1);
+                System.out.println(player + " healed themself");
+            }
+        }
+
+        int numGat = 0;
+        for(Die.Face f : game2.getDiceFaces()) {
+            if (f == Die.Face.GATLING) {
+                numGat++;
+            }
+        }
+
+        if (numGat >= 3) {
+            System.out.println(player + " fired the gatling gun");
+            for (int i = 0; i < game2.players.size(); i++) {
+                if (game2.players.get(i) != player) {
+                    game2.players.get(i).removeHP(1);
+                    if (game2.players.get(i).isEliminated()) game2.handleElim(game2.players.get(i));
+                }
+            }
+        }
+                
         
         for(Die d: game2.dice){
             d.setUnlockable(true);

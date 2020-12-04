@@ -19,7 +19,7 @@ public class Game {
 
     private boolean useExpansion1;
     private boolean useExpansion2;
-    private int numPlayers;
+    public int numPlayers;
 
     public ArrayList<Player> players = new ArrayList<Player>();
     
@@ -249,8 +249,8 @@ public class Game {
         }
 
         for (Die d : dice) {
-            d.setLocked(false);
             d.setUnlockable(true);
+            d.setLocked(false);
         }
     }
     
