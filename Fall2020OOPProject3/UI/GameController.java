@@ -356,6 +356,71 @@ public class GameController {
         
     }
 
+    /**
+     * Handle human player rolling shoot
+     *
+     * @param player the human player
+     * @param numS the type of shoot face on the die
+     */
+    public void handleDieShoot(Player player, int numS) {
+        if (player.getCharacter().toString().equals("Calamity Janet")) {
+            // check 1, 2 left, 1, 2 right
+        }
+        else if (player.getCharacter().toString().equals("Rose Doolan")) {
+            if (numS == 1) {
+                // check 1, 2 left; 1, 2 right
+            }
+            else if (numS == 2) {
+                // check 2, 3 left; 2, 3 right
+            }
+        }
+        else {
+            if (numS == 1) {
+                // check 1 left; 1 right
+
+            }
+            else if (numS == 2) {
+                // check 2 left; 2 right
+
+            }
+        }
+        /*
+        if (s == 1) {
+            this.rectBot1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent t) {
+                    game.players.get(0).shootPlayer(game.players.get(1));
+                }
+            });
+        }*/
+    }
+
+    /**
+     * Handle human player rolling beer
+     *
+     * @param player the human player
+     */
+    public void handleDieBeer(Player player) {
+        player.addHP(1);
+        System.out.println(player.getCharacter().toString() + " healed themself");
+    }
+
+    /**
+     * Handle human player rolling gatling
+     *
+     * @param player the human player
+     * @param numG the number of gatling rolled
+     */
+    public void handleDieGatling(Player player, int numG) {
+        if (numG >= 3) {
+            System.out.println(player.getCharacter().toString() + " fired the gatling gun");
+            for (Player p : game.players) {
+                if (p != player) {
+                    p.removeHP(1);
+                    if (p.isEliminated()) game.handleElim(p);
+                }
+            }
+        }
+    }
 
     /*  USED TO LOAD FINAL
     public void handleTemp(ActionEvent actionEvent) throws Exception{
