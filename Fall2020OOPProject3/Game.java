@@ -1,5 +1,6 @@
 package Fall2020OOPProject3;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import Fall2020OOPProject3.Die.Face;
 import Fall2020OOPProject3.Player.Role;
 import Fall2020OOPProject3.Player.Character;
+import javafx.scene.control.TextArea;
 
 public class Game {
 
@@ -28,7 +30,8 @@ public class Game {
 
     private int numArrows;
 
-    private boolean gameOver;
+    public boolean gameOver;
+    private TextArea textArea;
 
     public Game(int bots, boolean expansion1, boolean expansion2) {
         rand = new Random();
@@ -37,6 +40,7 @@ public class Game {
         numDice = 5;
         numArrows = 9;
         gameOver = false;
+        //textArea = historyTextArea;
 
         if (expansion2) {
             for (int i = 0; i < 3; i++) {
@@ -100,8 +104,10 @@ public class Game {
         }
         for (Die d : dice) {
             System.out.print(d.getCurrentFace() + ", ");
+            //textArea.appendText(d.getCurrentFace() + ", ");
         }
         System.out.println();
+        //textArea.appendText("\n");
     }
 
     
@@ -127,7 +133,8 @@ public class Game {
      */
     public void takeArrow(Player p) {
         p.addArrow();
-        System.out.println(p.getCharacter() + " took an arrow");
+        //System.out.println(p.getCharacter() + " took an arrow");
+        
         numArrows--;
         if (numArrows <= 0) {
             for (Player player : players) {

@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +18,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+
+import java.io.PrintStream;
 
 
 public class GameController {
@@ -121,6 +124,7 @@ public class GameController {
     //Button for rolling from Roll tab
     public Button btnRoll;
     public TableView discoveredRolesTable;
+    public TextArea historyTextArea;
 
     // Game instance
     private Game game;
@@ -140,6 +144,17 @@ public class GameController {
      * @param exp2 Undead or Alive expansion enabled
      */
     public void init(int bots, boolean exp1, boolean exp2) {
+        System.setOut(new PrintStream(System.out) {
+            public void println(String s){
+                historyTextArea.appendText(s + System.lineSeparator());
+            }
+            public void println(){
+                historyTextArea.appendText(System.lineSeparator());
+            }
+            public void print(String s){
+                historyTextArea.appendText(s);
+            }
+        });
         game = new Game(bots, exp1, exp2);      // set up game
         polyOct.setFill(imgpatTable);           // set up table
         updPlayers();                           // set up player character cards
@@ -163,6 +178,27 @@ public class GameController {
         imgDie3.setOnMouseClicked(mouseListener);
         imgDie4.setOnMouseClicked(mouseListener);
         imgDie5.setOnMouseClicked(mouseListener);
+        
+        /*
+        historyTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            historyTextArea.setScrollTop(0);
+        });*/
+        
+        //Game testing in Log
+        Game game2 = new Game(5, false, false);
+        while (!game2.gameOver) {
+            for (int i = 0; i < game2.players.size() && !game2.gameOver; i++) {
+                System.out.println();
+                System.out.println(game2.players.get(i).getCharacter() + "'s turn");
+                //historyTextArea.appendText(System.lineSeparator() + game2.players.get(i).getCharacter() + "'s turn");
+                game2.takeComputerTurn(game2.players.get(i));
+            }
+        }
+        for (Player p : game.players) {
+            System.out.println(p + " was a " + p.getRole());
+        }
+        
+        
     }
 
     /**
