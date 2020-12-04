@@ -1,8 +1,10 @@
 package Fall2020OOPProject3.UI;
 
+import Fall2020OOPProject3.Die;
 import Fall2020OOPProject3.Game;
 
 import Fall2020OOPProject3.Player;
+import Fall2020OOPProject3.VanillaDie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -123,10 +126,13 @@ public class GameController {
     public ImageView imgDie3;
     public ImageView imgDie4;
     public ImageView imgDie5;
+    public ImageView[] imgDie;
+    
 
     //Button for rolling from Roll tab
     public Button btnRoll;
     public TextArea historyTextArea;
+<<<<<<< HEAD
     public TableView discoveredRolesTable;
     public TableColumn colCharacter;
     public TableColumn colHealth;
@@ -136,6 +142,14 @@ public class GameController {
     // Game instance
     private Game game;
     private ArrayList<Player> playersOLD;
+    public Button endTurnButton;
+
+    // Game instance
+    private Game game;
+    private Game game2;
+    
+    private ColorAdjust black;
+    private ColorAdjust white;
 
     // ImagePatterns for filling
     private static final ImagePattern imgpatTable = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/table.jpg"));
@@ -152,15 +166,22 @@ public class GameController {
      * @param exp2 Undead or Alive expansion enabled
      */
     public void init(int bots, boolean exp1, boolean exp2) {
+
         System.setOut(new PrintStream(System.out) {
-            public void println(String s){
+            public void println(String s) {
                 historyTextArea.appendText(s + System.lineSeparator());
             }
-            public void println(){
+
+            public void println() {
                 historyTextArea.appendText(System.lineSeparator());
+                historyTextArea.setScrollTop(Double.MAX_VALUE);
+
             }
-            public void print(String s){
+
+            public void print(String s) {
                 historyTextArea.appendText(s);
+                historyTextArea.setScrollTop(Double.MAX_VALUE);
+
             }
         });
 
@@ -168,6 +189,7 @@ public class GameController {
         colCharacter.setCellValueFactory(new PropertyValueFactory<>("character"));
         colHealth.setCellValueFactory(new PropertyValueFactory<>("CurrentHP"));
         colRole.setCellValueFactory((new PropertyValueFactory<>("RoleMask")));
+        game2 = new Game(5, false, false);
 
         game = new Game(bots, exp1, exp2);      // set up game
         playersOLD = game.players;              // set up old players list
@@ -175,19 +197,50 @@ public class GameController {
         updPlayers();                           // set up player character cards
         updArrows();                            // set up arrows
 
+        imgDie = new ImageView[]{imgDie1, imgDie2, imgDie3, imgDie4, imgDie5};
+        
+        black = new ColorAdjust();
+        black.setHue(-1);
+        black.setSaturation(.25);
+        white = new ColorAdjust();
+        white.setHue(0);
+        
         /*
          * Assign lambda listeners for each image which set let the player toggle their locked/unlocked state
          * e.g. if(player == activeCharacter && this_die_unlockable) toggleLocked(); or something like this
          */
-        
+
         //showcase for reactive imageViews
-        EventHandler<MouseEvent> mouseListener = (MouseEvent e) ->{
-            if(e.getSource() instanceof ImageView) {
-                ImageView tempDieImageView = (ImageView) e.getSource();
-                tempDieImageView.setImage(new Image("file:src/Fall2020OOPProject3/UI/table.jpg"));
+
+        EventHandler<MouseEvent> mouseListener = (MouseEvent e) -> {
+            //ImageView tempDieImageView = (ImageView) e.getSource();
+            //tempDieImageView.setImage(new Image("file:src/Fall2020OOPProject3/UI/table.jpg"));
+            if (e.getSource() instanceof ImageView) {
+                
+
+                Die d = new VanillaDie();
+                /*
+                if (e.getSource() == imgDie1) d = game2.dice[0];
+                if (e.getSource() == imgDie2) d = game2.dice[1];
+                if (e.getSource() == imgDie3) d = game2.dice[2];
+                if (e.getSource() == imgDie4) d = game2.dice[3];
+                if (e.getSource() == imgDie5) d = game2.dice[4];*/
+                for(int i = 0; i < imgDie.length; i++){
+                    if(e.getSource() == imgDie[i]){
+                        d = game2.dice[i];
+                        break;
+                    }
+                }
+
+                d.toggleLocked();
+
+                if (d.isLocked()) ((ImageView) e.getSource()).setEffect(black);
+                else ((ImageView) e.getSource()).setEffect(white);
             }
+
         };
         //assign listener to all images
+
         imgDie1.setOnMouseClicked(mouseListener);
         imgDie2.setOnMouseClicked(mouseListener);
         imgDie3.setOnMouseClicked(mouseListener);
@@ -198,17 +251,20 @@ public class GameController {
         Game game2 = new Game(5, false, false);
         while (!game2.gameOver) {
             for (int i = 0; i < game2.players.size() && !game2.gameOver; i++) {
+
+        endTurnButton.setOnMouseClicked(e -> {
+            //TODO player resolve
+            for (int i = 1; i < game2.players.size() && !game2.gameOver; i++) {
                 System.out.println();
                 System.out.println(game2.players.get(i).getCharacter() + "'s turn");
-                //historyTextArea.appendText(System.lineSeparator() + game2.players.get(i).getCharacter() + "'s turn");
                 game2.takeComputerTurn(game2.players.get(i));
             }
-        }
-        for (Player p : game.players) {
-            System.out.println(p + " was a " + p.getRole());
-        }
-         */
+            rollCount = 1;
+            System.out.println();
+            historyTextArea.appendText("");
+        });
     }
+        
 
     /**
      * Update Players and Roles and Details tabs to reflect players still alive
@@ -284,6 +340,8 @@ public class GameController {
         }
     }
 
+    
+    int rollCount = 1;
     /**
      * Handle the pressing of the roll button.
      *
@@ -291,7 +349,139 @@ public class GameController {
      */
     public void handleRoll(ActionEvent actionEvent) {
         //should call game field -> player -> roll e.g. game.roll(Character.CHAR1); and then updates the images 
-        //for each of the die faces. 
+        //for each of the die faces.
+        historyTextArea.appendText("");
+        
+        //TODO update DIE PICTURES
+        if(rollCount==1) {
+            game2.rollDice(new boolean[]{true, true, true, true, true}, game2.players.get(0));
+        }
+        else if(rollCount == 2){
+            boolean[] rolls = new boolean[5];
+            for(int i = 0; i < game2.dice.length; i++)
+                rolls[i] = !game2.dice[i].isLocked();
+            
+            game2.rollDice(rolls, game2.players.get(0));
+        }
+        else if(rollCount== 3){
+            boolean[] rolls = new boolean[5];
+            for(int i = 0; i < game2.dice.length; i++)
+                rolls[i] = !game2.dice[i].isLocked();
+
+            game2.rollDice(rolls, game2.players.get(0));
+            resolveDice();
+            return;
+        }
+        for(int i = 0; i< imgDie.length; i++){
+            if (game2.dice[i].isLocked())
+                imgDie[i].setEffect(black);
+            else imgDie[i].setEffect(white);
+        }
+        if(rollCount >=1 && rollCount <3 ) rollCount++;
+
+        int numDynamite = 0;
+        for (Die d : game2.dice) {
+            if (d.getCurrentFace() == Die.Face.DYNAMITE) {
+                numDynamite++;
+                d.setLocked(true);
+            }
+        }
+        
+        if(numDynamite >= 3) {
+            resolveDice();
+            return;
+        }
+    }
+    
+    public void resolveDice(){
+        Player player = game2.players.get(0);
+        for(Die d: game2.dice) {
+            d.setUnlockable(false);
+            d.setLocked(true);
+        }
+        int numDynamite = 0;
+        for (Die d : game2.dice) {
+            if (d.getCurrentFace() == Die.Face.DYNAMITE) numDynamite++;
+        }
+        if(numDynamite >= 3) {
+            System.out.println("Dynamite blew up in " + game2.players.get(0) + "'s face!");
+            player.removeHP(1);
+            if (player.isEliminated()) {
+                game2.handleElim(player);
+                return;
+            }
+        }
+        
+        for(Die.Face f: game2.getDiceFaces()){
+            if (f == Die.Face.SHOOT1) {
+                if(player.getCharacter() == Player.Character.CALAMITY_JANET) {
+                    Player[] targets = new Player[] {
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-1), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+1), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-2), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+2), game2.numPlayers))
+                    };
+                    //TODO player choice, listener
+                }
+                else {
+                    Player[] targets = new Player[] {
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-1), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+1), game2.numPlayers))
+                    };
+                    //TODO player choice, listener
+                }
+            }
+            if (f == Die.Face.SHOOT2) {
+                if(player.getCharacter() == Player.Character.CALAMITY_JANET) {
+                    Player[] targets = new Player[] {
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-1), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+1), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-2), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+2), game2.numPlayers))
+                    };
+                    //TODO player choice, listener
+                }
+                else {
+                    Player[] targets = new Player[] {
+                            game2.players.get(Math.floorMod((player.getSeatPosition()-2), game2.numPlayers)),
+                            game2.players.get(Math.floorMod((player.getSeatPosition()+2), game2.numPlayers))
+                    };
+                    //TODO player choice, listener
+                }
+            }
+        }
+
+        for(Die.Face f : game2.getDiceFaces()) {
+            if (f == Die.Face.BEER) {
+                player.addHP(1);
+                System.out.println(player + " healed themself");
+            }
+        }
+
+        int numGat = 0;
+        for(Die.Face f : game2.getDiceFaces()) {
+            if (f == Die.Face.GATLING) {
+                numGat++;
+            }
+        }
+
+        if (numGat >= 3) {
+            System.out.println(player + " fired the gatling gun");
+            for (int i = 0; i < game2.players.size(); i++) {
+                if (game2.players.get(i) != player) {
+                    game2.players.get(i).removeHP(1);
+                    if (game2.players.get(i).isEliminated()) game2.handleElim(game2.players.get(i));
+                }
+            }
+        }
+                
+        
+        for(Die d: game2.dice){
+            d.setUnlockable(true);
+            d.setLocked(false);
+        }
+        rollCount = -1;
+        
     }
 
     /**

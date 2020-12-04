@@ -663,6 +663,15 @@
                                     <Insets top="50.0" />
                                  </padding>
                               </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <StackPane prefHeight="100.0" prefWidth="1936.0">
+                                       <children>
+                                          <Button fx:id="endTurnButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="End Turn" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children></AnchorPane>
@@ -685,27 +694,27 @@
                      <children>
                         <ImageView fx:id="imgDie1" fitHeight="119.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@art/none.png" />
+                              <Image url="@art/arrow.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="imgDie2" fitHeight="120.0" fitWidth="121.0" layoutX="10.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@art/none.png" />
+                              <Image url="@art/arrow.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="imgDie3" fitHeight="120.0" fitWidth="127.0" layoutX="130.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@art/none.png" />
+                              <Image url="@art/arrow.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="imgDie4" fitHeight="121.0" fitWidth="122.0" layoutX="250.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@art/none.png" />
+                              <Image url="@art/arrow.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="imgDie5" fitHeight="117.0" fitWidth="123.0" layoutX="370.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@art/none.png" />
+                              <Image url="@art/arrow.png" />
                            </image>
                         </ImageView>
                         <Button fx:id="btnRoll" alignment="CENTER" mnemonicParsing="false" onAction="#handleRoll" prefHeight="46.0" prefWidth="115.0" text="Roll Unlocked Dice" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
