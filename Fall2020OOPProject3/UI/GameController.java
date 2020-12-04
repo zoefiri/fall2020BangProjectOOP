@@ -8,8 +8,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +22,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 
 public class GameController {
@@ -123,11 +126,16 @@ public class GameController {
 
     //Button for rolling from Roll tab
     public Button btnRoll;
-    public TableView discoveredRolesTable;
     public TextArea historyTextArea;
+    public TableView discoveredRolesTable;
+    public TableColumn colCharacter;
+    public TableColumn colHealth;
+    public TableColumn colRole;
+
 
     // Game instance
     private Game game;
+    private ArrayList<Player> playersOLD;
 
     // ImagePatterns for filling
     private static final ImagePattern imgpatTable = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/table.jpg"));
@@ -155,7 +163,14 @@ public class GameController {
                 historyTextArea.appendText(s);
             }
         });
+
+        // set up discovered roles table
+        colCharacter.setCellValueFactory(new PropertyValueFactory<>("character"));
+        colHealth.setCellValueFactory(new PropertyValueFactory<>("CurrentHP"));
+        colRole.setCellValueFactory((new PropertyValueFactory<>("RoleMask")));
+
         game = new Game(bots, exp1, exp2);      // set up game
+        playersOLD = game.players;              // set up old players list
         polyOct.setFill(imgpatTable);           // set up table
         updPlayers();                           // set up player character cards
         updArrows();                            // set up arrows
@@ -178,7 +193,6 @@ public class GameController {
         imgDie3.setOnMouseClicked(mouseListener);
         imgDie4.setOnMouseClicked(mouseListener);
         imgDie5.setOnMouseClicked(mouseListener);
-        
         /*
         //Game testing in Log
         Game game2 = new Game(5, false, false);
@@ -197,25 +211,48 @@ public class GameController {
     }
 
     /**
-     * Update player art to reflect players still alive
+     * Update Players and Roles and Details tabs to reflect players still alive
      *
      */
     private void updPlayers() {
         Rectangle[] rectChars = {this.rectPlayer, this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
-        //ObservableList<Player> data = FXCollections.observableArrayList();
-
-        for (int i = 0; i < game.players.size(); i++) {
-            if (game.players.get(i).isEliminated())
+        int j = 0;
+        for (int i = 0; i < playersOLD.size(); i++) {
+            if (game.players.get(i) != null) {
+                if (playersOLD.get(j) != game.players.get(i)) {
+                    j++;
+                    rectChars[i].setFill(imgpatDead);
+                }
+                else {
+                    rectChars[i].setFill(new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/" + game.players.get(i).getCharacter().toString() + ".png")));
+                    try {
+                        discoveredRolesTable.getItems().remove(i);
+                    } catch (IndexOutOfBoundsException e) {}
+                }
+            }
+            else
                 rectChars[i].setFill(imgpatDead);
+            j++;
+        }
+        for (Player p : game.players)
+            discoveredRolesTable.getItems().add(p);
+        /*
+        discoveredRolesTable.getItems().removeAll();
+        for (int i = 0; i < game.players.size(); i++) {
+            if (game.players.get(i).isEliminated()) {
+                rectChars[i].setFill(imgpatDead);
+            }
             else {
                 rectChars[i].setFill(new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/" + game.players.get(i).getCharacter().toString() + ".png")));
             }
-            //data.add(game.players.get(i));
+            discoveredRolesTable.getItems().add(game.players.get(i));
         }
         for (int i = game.players.size(); i < rectChars.length; i++) {
             rectChars[i].setFill(imgpatNone);
             rectChars[i].setStroke(Color.TRANSPARENT);
         }
+
+         */
         //discoveredRolesTable.setItems(data); //.addAll(game.players.get(i).getCharacter().toString(), game.players.get(i).getCurrentHP(), game.players.get(i).getRole());
     }
 

@@ -198,5 +198,12 @@ public class Player {
 	public String toString() {
 		return character.toString();
 	}
+
+	public String getRoleMask() {
+		if (isEliminated())
+			return getRole().toString();
+		else
+			return "UNKNOWN";
+	}
 	
 }
