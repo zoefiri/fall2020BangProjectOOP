@@ -135,6 +135,9 @@ public class GameController {
     // Game instance
     private Game game;
     private Game game2;
+    
+    private ColorAdjust black;
+    private ColorAdjust white;
 
     // ImagePatterns for filling
     private static final ImagePattern imgpatTable = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/table.jpg"));
@@ -159,10 +162,14 @@ public class GameController {
 
             public void println() {
                 historyTextArea.appendText(System.lineSeparator());
+                historyTextArea.setScrollTop(Double.MAX_VALUE);
+
             }
 
             public void print(String s) {
                 historyTextArea.appendText(s);
+                historyTextArea.setScrollTop(Double.MAX_VALUE);
+
             }
         });
 
@@ -175,7 +182,12 @@ public class GameController {
 
         imgDie = new ImageView[]{imgDie1, imgDie2, imgDie3, imgDie4, imgDie5};
         
-
+        black = new ColorAdjust();
+        black.setHue(-1);
+        black.setSaturation(.25);
+        white = new ColorAdjust();
+        white.setHue(0);
+        
         /*
          * Assign lambda listeners for each image which set let the player toggle their locked/unlocked state
          * e.g. if(player == activeCharacter && this_die_unlockable) toggleLocked(); or something like this
@@ -187,10 +199,7 @@ public class GameController {
             //ImageView tempDieImageView = (ImageView) e.getSource();
             //tempDieImageView.setImage(new Image("file:src/Fall2020OOPProject3/UI/table.jpg"));
             if (e.getSource() instanceof ImageView) {
-                ColorAdjust black = new ColorAdjust();
-                black.setHue(-1);
-                ColorAdjust white = new ColorAdjust();
-                white.setHue(0);
+                
 
                 Die d = new VanillaDie();
                 /*
@@ -230,6 +239,7 @@ public class GameController {
             }
             rollCount = 1;
             System.out.println();
+            historyTextArea.appendText("");
         });
     }
         
@@ -294,7 +304,8 @@ public class GameController {
      */
     public void handleRoll(ActionEvent actionEvent) {
         //should call game field -> player -> roll e.g. game.roll(Character.CHAR1); and then updates the images 
-        //for each of the die faces. 
+        //for each of the die faces.
+        historyTextArea.appendText("");
         
         //TODO update DIE PICTURES
         if(rollCount==1) {
@@ -315,6 +326,11 @@ public class GameController {
             game2.rollDice(rolls, game2.players.get(0));
             resolveDice();
             return;
+        }
+        for(int i = 0; i< imgDie.length; i++){
+            if (game2.dice[i].isLocked())
+                imgDie[i].setEffect(black);
+            else imgDie[i].setEffect(white);
         }
         if(rollCount >=1 && rollCount <3 ) rollCount++;
 
