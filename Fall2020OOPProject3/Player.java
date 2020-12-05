@@ -205,5 +205,11 @@ public class Player {
 		else
 			return "UNKNOWN";
 	}
-	
+
+	public String getCurrentHPMask() {
+		if (isEliminated())
+			return "DEAD";
+		else
+			return Integer.toString(getCurrentHP());
+	}
 }
