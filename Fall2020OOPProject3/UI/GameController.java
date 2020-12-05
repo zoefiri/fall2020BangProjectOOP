@@ -348,6 +348,19 @@ public class GameController {
         //for each of the die faces.
         historyTextArea.appendText("");
         
+        
+        for(int i = 0; i < imgDie.length; i++){
+            switch(game2.dice[i].getCurrentFace()){
+                case BEER:
+                    imgDie[i].setImage(new Image());
+                case ARROW:
+                case SHOOT1:
+                case SHOOT2:
+                case GATLING:
+                case DYNAMITE:
+            }
+        }
+        
         //TODO update DIE PICTURES
         if(rollCount==1) {
             game2.rollDice(new boolean[]{true, true, true, true, true}, game2.players.get(0));
