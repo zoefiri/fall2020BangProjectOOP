@@ -58,6 +58,8 @@ public class Player {
 
 	
 	/** 
+	 * Makes the player shoot another player.
+	 * 
 	 * @param player The Player this Player is going to shoot.
 	 */
 	public void shootPlayer(Player player) {
@@ -67,6 +69,7 @@ public class Player {
 
 	
 	/** 
+	 * Handles the damage for an Indian attack.
 	 * @return int The HP the Player has after the attack.
 	 */
 	public void indianAttack() {
@@ -79,6 +82,7 @@ public class Player {
 
 	
 	/** 
+	 * Adds an arrow to the player's pool.
 	 * @return int The amount of arrows the player has after adding one.
 	 */
 	public int addArrow() {
@@ -87,6 +91,7 @@ public class Player {
 
 	
 	/** 
+	 * Adds HP to a players total, capping it at their maximum.
 	 * @param heal The amount of HP to restore.
 	 * @return int The HP of the Player after healing.
 	 */
@@ -98,6 +103,7 @@ public class Player {
 
 	
 	/** 
+	 * Removes HP from a player and updates the eliminated flag.
 	 * @param hit The amount of HP to subtract.
 	 * @return int The HP of the player after being hit.
 	 */
@@ -109,6 +115,7 @@ public class Player {
 
 	
 	/** 
+	 * Returns the seat position of the player.
 	 * @return int The current seat position of the Player.
 	 */
 	public int getSeatPosition() {
@@ -117,6 +124,7 @@ public class Player {
 
 	
 	/** 
+	 * Moves the player to a new seat position.
 	 * @param seat The seat position to move the player to.
 	 */
 	public void setSeatPosition(int seat) {
@@ -125,6 +133,7 @@ public class Player {
 
 	
 	/** 
+	 * Gets the Role of the player.
 	 * @return Role The current Role of the Player.
 	 */
 	public Role getRole() {
@@ -133,6 +142,7 @@ public class Player {
 
 	
 	/** 
+	 * Gets the Character of the player.
 	 * @return Character The current Character of the Player.
 	 */
 	public Character getCharacter(){
@@ -141,6 +151,7 @@ public class Player {
 
 	
 	/** 
+	 * Gets the amount of arrows the player currently has.
 	 * @return int The amount of arrows the Player currently has.
 	 */
 	public int getCurrentArrows() {
@@ -149,6 +160,7 @@ public class Player {
 
 	
 	/** 
+	 * Gets the amount of HP the player currently has.
 	 * @return int The amount of HP the Player currently has.
 	 */
 	public int getCurrentHP() {
@@ -173,6 +185,7 @@ public class Player {
 
 	
 	/** 
+	 * Looks up the maximum HP a player should have based on what character they are.
 	 * @param character The Character to look up.
 	 * @return int The Maximum HP of character.
 	 */
@@ -201,6 +214,10 @@ public class Player {
 		return character.toString();
 	}
 
+	/**
+	 * If this player's role is known to the human player, get it; if not, return "UNKNOWN".
+	 * @return String gets the role if it is known, or "UNKNOWN" if not.
+	 */
 	public String getRoleMask() {
 		if (isHuman)
 			return getRole().toString();
@@ -210,6 +227,10 @@ public class Player {
 			return "UNKNOWN";
 	}
 
+	/**
+	 * Return the HP of the current player, or "DEAD" if the player is eliminated.
+	 * @return String the HP of the player, or "DEAD"
+	 */
 	public String getCurrentHPMask() {
 		if (isEliminated())
 			return "DEAD";
