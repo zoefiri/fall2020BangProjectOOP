@@ -40,6 +40,7 @@ public class Player {
 		}
 	}
 
+	public boolean isHuman = false;
 	protected int hp;
 	protected int arrows;
 	protected int seatPosition;
@@ -68,11 +69,12 @@ public class Player {
 	/** 
 	 * @return int The HP the Player has after the attack.
 	 */
-	public int indianAttack() {
-		if (arrows == 0) return hp;
-		hp -= (character == Character.JOURDONNAIS) ? 1 : arrows;
-		arrows = 0;
-		return hp; 
+	public void indianAttack() {
+		if (arrows != 0) {
+			if (character == Character.JOURDONNAIS) removeHP(1);
+			else removeHP(arrows);
+			arrows = 0;
+		}
 	}
 
 	
@@ -198,5 +200,21 @@ public class Player {
 	public String toString() {
 		return character.toString();
 	}
-	
+
+	public String getRoleMask() {
+		if (isHuman)
+			return getRole().toString();
+		if (isEliminated())
+			return getRole().toString();
+		else
+			return "UNKNOWN";
+	}
+
+	public String getCurrentHPMask() {
+		if (isEliminated())
+			return "DEAD";
+		else
+			return Integer.toString(getCurrentHP());
+	}
+
 }

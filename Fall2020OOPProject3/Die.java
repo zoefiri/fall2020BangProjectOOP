@@ -47,7 +47,8 @@ public abstract class Die{
 	}
 
 	public void toggleLocked() {
-		if (unlockable) locked = !locked;
+		if (unlockable && locked) locked = false;
+		else locked = true;
 	}
 
 	

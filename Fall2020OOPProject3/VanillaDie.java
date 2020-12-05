@@ -17,6 +17,7 @@ public class VanillaDie extends Die {
 
 	public VanillaDie() {
 		currentFace = Face.ARROW;
+		setUnlockable(true);
 	}
 
 	public static void main(String[] args) {

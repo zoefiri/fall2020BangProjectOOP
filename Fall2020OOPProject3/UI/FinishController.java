@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Slider;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class FinishController {
@@ -14,6 +15,15 @@ public class FinishController {
     public Slider sliderBots;
     public CheckBox cbExpOS;
     public CheckBox cbExpUoA;
+    public Text txtWin;
+
+    public void init(String winners, boolean playerWin) {
+        if (playerWin)
+            txtWin.setText("Congratulations! " + winners + " win.");
+        else
+            txtWin.setText("Better luck next time! " + winners + " win.");
+
+    }
 
     public void handleQuit(ActionEvent actionEvent) {
         ((Stage)btnQuit.getScene().getWindow()).close();

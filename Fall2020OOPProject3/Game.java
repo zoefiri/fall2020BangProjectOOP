@@ -1,5 +1,6 @@
 package Fall2020OOPProject3;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import Fall2020OOPProject3.Die.Face;
 import Fall2020OOPProject3.Player.Role;
 import Fall2020OOPProject3.Player.Character;
+import javafx.scene.control.TextArea;
 
 public class Game {
 
@@ -17,18 +19,20 @@ public class Game {
 
     private boolean useExpansion1;
     private boolean useExpansion2;
-    private int numPlayers;
+    public int numPlayers;
 
     public ArrayList<Player> players = new ArrayList<Player>();
+    public ArrayList<Player> playersDead = new ArrayList<Player>();         // ADDED
     
-    private Die[] dice;
+    public Die[] dice;
     private Die[] extraDice;
     private int numDice;
     private boolean useExtraDice;
 
     private int numArrows;
 
-    private boolean gameOver;
+    public boolean gameOver;
+    private TextArea textArea;
 
     public Game(int bots, boolean expansion1, boolean expansion2) {
         rand = new Random();
@@ -37,6 +41,7 @@ public class Game {
         numDice = 5;
         numArrows = 9;
         gameOver = false;
+        //textArea = historyTextArea;
 
         if (expansion2) {
             for (int i = 0; i < 3; i++) {
@@ -68,7 +73,7 @@ public class Game {
         for (int i = 0; i < numPlayers; i++) {
             players.add(new Player(allChars.get(i), allRoles.get(i), i));
         }
-
+        players.get(0).isHuman = true;
     }
 
     
@@ -100,8 +105,10 @@ public class Game {
         }
         for (Die d : dice) {
             System.out.print(d.getCurrentFace() + ", ");
+            //textArea.appendText(d.getCurrentFace() + ", ");
         }
         System.out.println();
+        //textArea.appendText("\n");
     }
 
     
@@ -127,11 +134,13 @@ public class Game {
      */
     public void takeArrow(Player p) {
         p.addArrow();
-        System.out.println(p.getCharacter() + " took an arrow");
+        //System.out.println(p.getCharacter() + " took an arrow");
+        
         numArrows--;
         if (numArrows <= 0) {
-            for (Player player : players) {
-                player.indianAttack();
+            for (int i = 0; i < players.size(); i++) {
+                players.get(i).indianAttack();
+                if (players.get(i).isEliminated()) handleElim(players.get(i));
             }
             numArrows = 9;
         }
@@ -256,12 +265,125 @@ public class Game {
 
         //Unlock the dice for the next player.
         for (Die d : dice) {
+            d.setUnlockable(true);
+            d.setLocked(false);
+        }
+    }
+    
+    public void takePlayerTurn(Player player) {
+        boolean turnEnd = false;
+        rollDice(new boolean[] {true, true, true, true, true}, player);
+        int numDynamite = 0;
+        for (Die d : dice) {
+            if (d.getCurrentFace() == Face.DYNAMITE) numDynamite++;
+        }
+        turnEnd = numDynamite >= 3;
+        
+        //TODO player choice
+		for(int i = 0; i < 2 && !turnEnd; i++) {
+			boolean roll1 = rand.nextBoolean() || getDiceFaces()[0] == Face.ARROW;
+			boolean roll2 = rand.nextBoolean() || getDiceFaces()[1] == Face.ARROW;
+			boolean roll3 = rand.nextBoolean() || getDiceFaces()[2] == Face.ARROW;
+			boolean roll4 = rand.nextBoolean() || getDiceFaces()[3] == Face.ARROW;
+			boolean roll5 = rand.nextBoolean() || getDiceFaces()[4] == Face.ARROW;
+			rollDice(new boolean[] {roll1, roll2, roll3, roll4, roll5}, player);
+            numDynamite = 0;
+            for (Die d : dice) {
+                if (d.getCurrentFace() == Face.DYNAMITE) numDynamite++;
+            }
+            turnEnd = numDynamite >= 3;
+        }
+        if (numDynamite >= 3) {
+            System.out.println("Dynamite blew up in " + player + "'s face!");
+            player.removeHP(1);
+            if (player.isEliminated()) {
+                handleElim(player);
+                return;
+            }
+        }
+        for (Face f : getDiceFaces()) {
+            if (f == Face.SHOOT1) {
+                if(player.getCharacter() == Character.CALAMITY_JANET) {
+                    Player[] targets = new Player[] {
+                        players.get(Math.floorMod((player.getSeatPosition()-1), numPlayers)), 
+                        players.get(Math.floorMod((player.getSeatPosition()+1), numPlayers)),
+                        players.get(Math.floorMod((player.getSeatPosition()-2), numPlayers)), 
+                        players.get(Math.floorMod((player.getSeatPosition()+2), numPlayers)) 
+                    };
+                    //TODO player choice
+                    Player target = targets[rand.nextInt(4)];
+                    player.shootPlayer(target);
+                    if (target.isEliminated()) handleElim(target);
+                }
+                else {
+                    Player[] targets = new Player[] {
+                        players.get(Math.floorMod((player.getSeatPosition()-1), numPlayers)), 
+                        players.get(Math.floorMod((player.getSeatPosition()+1), numPlayers))
+                    };
+                    //TODO player choice
+                    Player target = targets[rand.nextInt(2)];
+                    player.shootPlayer(target);
+                    if (target.isEliminated()) handleElim(target);
+                }
+            }
+            if (f == Face.SHOOT2) {
+                if(player.getCharacter() == Character.CALAMITY_JANET) {
+                    Player[] targets = new Player[] {
+                        players.get(Math.floorMod((player.getSeatPosition()-1), numPlayers)), 
+                        players.get(Math.floorMod((player.getSeatPosition()+1), numPlayers)),
+                        players.get(Math.floorMod((player.getSeatPosition()-2), numPlayers)), 
+                        players.get(Math.floorMod((player.getSeatPosition()+2), numPlayers)) 
+                    };
+                    //TODO player choice
+                    Player target = targets[rand.nextInt(4)];
+                    player.shootPlayer(target);
+                    if (target.isEliminated()) handleElim(target);
+                }
+                else {
+                    Player[] targets = new Player[] {
+                        players.get(Math.floorMod((player.getSeatPosition()-2), numPlayers)), 
+                        players.get(Math.floorMod((player.getSeatPosition()+2), numPlayers)) 
+                    };
+                    //TODO player choice
+                    Player target = targets[rand.nextInt(2)];
+                    player.shootPlayer(target);
+                    if (target.isEliminated()) handleElim(target);
+                }
+            }
+        }
+
+        for(Face f : getDiceFaces()) {
+            if (f == Face.BEER) {
+                player.addHP(1);
+                System.out.println(player + " healed themself");
+            }
+        }
+
+        int numGat = 0;
+		for(Face f : getDiceFaces()) {
+            if (f == Face.GATLING) {
+                numGat++;
+            }
+        }
+
+        if (numGat >= 3) {
+            System.out.println(player + " fired the gatling gun");
+            for (int i = 0; i < players.size(); i++) {
+                if (players.get(i) != player && !(players.get(i).getCharacter().toString().equals("Paul Regret"))) {
+                    players.get(i).removeHP(1);
+                    if (players.get(i).isEliminated()) handleElim(players.get(i));
+                }
+            }
+        }
+
+        for (Die d : dice) {
             d.setLocked(false);
             d.setUnlockable(true);
         }
     }
     
     public void handleElim(Player player) {
+        playersDead.add(player);
         players.remove(player);
         numPlayers--;
         for (int i = 0; i < players.size(); i++) {
@@ -311,6 +433,7 @@ public class Game {
             for (int i = 0; i < game.players.size() && !game.gameOver; i++) {
                 System.out.println();
                 System.out.println(game.players.get(i).getCharacter() + "'s turn");
+                
                 game.takeComputerTurn(game.players.get(i));
             }
         }

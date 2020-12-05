@@ -1,14 +1,22 @@
 package Fall2020OOPProject3.UI;
 
+import Fall2020OOPProject3.Die;
 import Fall2020OOPProject3.Game;
 
 import Fall2020OOPProject3.Player;
+import Fall2020OOPProject3.VanillaDie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +25,12 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+
+import java.io.FileInputStream;
+import java.io.PrintStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 public class GameController {
@@ -110,20 +124,30 @@ public class GameController {
 
     public Polygon polyOct;
     
-    
     //Die images from Roll tab
     public ImageView imgDie1;
     public ImageView imgDie2;
     public ImageView imgDie3;
     public ImageView imgDie4;
     public ImageView imgDie5;
+    public ImageView[] imgDie;
+
+    public Button endTurnButton;
 
     //Button for rolling from Roll tab
     public Button btnRoll;
+    public TextArea historyTextArea;
     public TableView discoveredRolesTable;
+    public TableColumn colCharacter;
+    public TableColumn colHealth;
+    public TableColumn colRole;
 
     // Game instance
     private Game game;
+    private String humanRole;
+    
+    private ColorAdjust black;
+    private ColorAdjust white;
 
     // ImagePatterns for filling
     private static final ImagePattern imgpatTable = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/table.jpg"));
@@ -140,21 +164,62 @@ public class GameController {
      * @param exp2 Undead or Alive expansion enabled
      */
     public void init(int bots, boolean exp1, boolean exp2) {
+
+        System.setOut(new PrintStream(System.out) {
+            public void println(String s) {
+                historyTextArea.appendText(s + System.lineSeparator());
+            }
+
+            public void println() {
+                historyTextArea.appendText(System.lineSeparator());
+                historyTextArea.setScrollTop(Double.MAX_VALUE);
+            }
+
+            public void print(String s) {
+                historyTextArea.appendText(s);
+                historyTextArea.setScrollTop(Double.MAX_VALUE);
+            }
+        });
+
+        // set up discovered roles table
+        colCharacter.setCellValueFactory(new PropertyValueFactory<>("character"));
+        colHealth.setCellValueFactory(new PropertyValueFactory<>("CurrentHPMask"));
+        colRole.setCellValueFactory((new PropertyValueFactory<>("RoleMask")));
+
         game = new Game(bots, exp1, exp2);      // set up game
         polyOct.setFill(imgpatTable);           // set up table
         updPlayers();                           // set up player character cards
         updArrows();                            // set up arrows
 
+        humanRole = game.players.get(0).getRole().toString();
+
+        imgDie = new ImageView[]{imgDie1, imgDie2, imgDie3, imgDie4, imgDie5};
+
+        black = new ColorAdjust();
+        black.setHue(-1);
+        black.setSaturation(.25);
+        white = new ColorAdjust();
+        white.setHue(0);
+
         /*
          * Assign lambda listeners for each image which set let the player toggle their locked/unlocked state
          * e.g. if(player == activeCharacter && this_die_unlockable) toggleLocked(); or something like this
          */
-        
-        //showcase for reactive imageViews
-        EventHandler<MouseEvent> mouseListener = (MouseEvent e) ->{
-            if(e.getSource() instanceof ImageView) {
-                ImageView tempDieImageView = (ImageView) e.getSource();
-                tempDieImageView.setImage(new Image("file:src/Fall2020OOPProject3/UI/table.jpg"));
+        EventHandler<MouseEvent> mouseListener = (MouseEvent e) -> {
+            //ImageView tempDieImageView = (ImageView) e.getSource();
+            //tempDieImageView.setImage(new Image("file:src/Fall2020OOPProject3/UI/table.jpg"));
+            if (e.getSource() instanceof ImageView) {
+                Die d = new VanillaDie();
+
+                for (int i = 0; i < imgDie.length; i++) {
+                    if (e.getSource() == imgDie[i]) {
+                        d = game.dice[i];
+                        break;
+                    }
+                }
+                d.toggleLocked();
+                if (d.isLocked()) ((ImageView) e.getSource()).setEffect(black);
+                else ((ImageView) e.getSource()).setEffect(white);
             }
         };
         //assign listener to all images
@@ -163,29 +228,60 @@ public class GameController {
         imgDie3.setOnMouseClicked(mouseListener);
         imgDie4.setOnMouseClicked(mouseListener);
         imgDie5.setOnMouseClicked(mouseListener);
+
+        endTurnButton.setOnMouseClicked(e -> {
+            updPlayers();
+            //TODO player resolve
+            for (int i = 1; i < game.players.size() && !game.gameOver; i++) {
+                System.out.println();
+                System.out.println(game.players.get(i).getCharacter() + "'s turn");
+                game.takeComputerTurn(game.players.get(i));
+                //updPlayers();
+            }
+            rollCount = 1;
+            System.out.println();
+            historyTextArea.appendText("");
+            updPlayers();
+        });
     }
+        
 
     /**
-     * Update player art to reflect players still alive
+     * Update Players and Roles and Details tabs to reflect players still alive
      *
      */
     private void updPlayers() {
-        Rectangle[] rectChars = {this.rectPlayer, this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
-        //ObservableList<Player> data = FXCollections.observableArrayList();
-
-        for (int i = 0; i < game.players.size(); i++) {
-            if (game.players.get(i).isEliminated())
-                rectChars[i].setFill(imgpatDead);
-            else {
-                rectChars[i].setFill(new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/" + game.players.get(i).getCharacter().toString() + ".png")));
+        if (game.players.size() == 0)
+            try {loadFinish();} catch (Exception e) {}
+        if (!game.players.get(0).isHuman)
+            while(!game.gameOver)
+                for (int i = 0; i < game.players.size(); i++)
+                    game.takeComputerTurn(game.players.get(i));
+        if (game.gameOver)
+            try {loadFinish();} catch (Exception e) {}
+        /*
+        for (Player p : game.players)
+            if (p.getCurrentHP() <= 0) {
+                while (!p.isEliminated()) {
+                    p.removeHP(1);
+                }
+                System.out.println("HAD TO KILL MANUALLY");
             }
-            //data.add(game.players.get(i));
+         */
+        Rectangle[] rectChars = {this.rectPlayer, this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
+        discoveredRolesTable.getItems().clear();
+        for (int i = 0; i < game.players.size(); i++) {
+            discoveredRolesTable.getItems().add(game.players.get(i));
+            rectChars[i].setFill(new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/" + game.players.get(i).getCharacter().toString() + ".png")));
+        }
+        for (int i = 0; i < game.playersDead.size(); i++) {
+            discoveredRolesTable.getItems().add(game.playersDead.get(i));
         }
         for (int i = game.players.size(); i < rectChars.length; i++) {
             rectChars[i].setFill(imgpatNone);
             rectChars[i].setStroke(Color.TRANSPARENT);
         }
-        //discoveredRolesTable.setItems(data); //.addAll(game.players.get(i).getCharacter().toString(), game.players.get(i).getCurrentHP(), game.players.get(i).getRole());
+        updArrows();
     }
 
     /**
@@ -215,7 +311,37 @@ public class GameController {
             }
         }
     }
+    
+    public void updateDiceImages(){
+        try {
+            for (int i = 0; i < imgDie.length; i++) {
+                switch (game.dice[i].getCurrentFace()) {
+                    case BEER:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/beer.jpg"));
+                        break;
+                    case ARROW:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/arrow.png"));
+                        break;
+                    case SHOOT1:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/shoot1.jpg"));
+                        break;
+                    case SHOOT2:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/shoot2.jpg"));
+                        break;
+                    case GATLING:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/gatling.jpg"));
+                        break;
+                    case DYNAMITE:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/dynamite.jpg"));
+                        break;
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
+    int rollCount = 1;
     /**
      * Handle the pressing of the roll button.
      *
@@ -223,19 +349,269 @@ public class GameController {
      */
     public void handleRoll(ActionEvent actionEvent) {
         //should call game field -> player -> roll e.g. game.roll(Character.CHAR1); and then updates the images 
-        //for each of the die faces. 
+        //for each of the die faces.
+        historyTextArea.appendText("");
+        if(rollCount > 3 || rollCount < 1) return;
+      
+        //TODO update DIE PICTURES
+        if(rollCount==1) {
+            game.rollDice(new boolean[]{true, true, true, true, true}, game.players.get(0));
+            updateDiceImages();
+        }
+        else if(rollCount == 2){
+            boolean[] rolls = new boolean[5];
+            for(int i = 0; i < game.dice.length; i++)
+                rolls[i] = !game.dice[i].isLocked();
+
+            game.rollDice(rolls, game.players.get(0));
+            updateDiceImages();
+        }
+        else if(rollCount== 3){
+            boolean[] rolls = new boolean[5];
+            for(int i = 0; i < game.dice.length; i++)
+                rolls[i] = !game.dice[i].isLocked();
+
+            game.rollDice(rolls, game.players.get(0));
+            updateDiceImages();
+            resolveDice();
+            return;
+        }
+        for(int i = 0; i< imgDie.length; i++){
+            if (game.dice[i].isLocked())
+                imgDie[i].setEffect(black);
+            else imgDie[i].setEffect(white);
+        }
+        if(rollCount >=1 && rollCount <3 ) rollCount++;
+
+        int numDynamite = 0;
+        for (Die d : game.dice) {
+            if (d.getCurrentFace() == Die.Face.DYNAMITE) {
+                numDynamite++;
+                d.setLocked(true);
+            }
+        }
+        
+        if(numDynamite >= 3) {
+            resolveDice();
+            return;
+        }
+        // updPlayers();
     }
 
+    ArrayList<Player> targets;
+    int shot1Left= 0;
+    int shot2Left = 0;
+            
+    public void resolveDice(){
+        Player player = game.players.get(0);
+        for(Die d: game.dice) {
+            d.setUnlockable(false);
+            d.setLocked(true);
+        }
+        int numDynamite = 0;
+        for (Die d : game.dice) {
+            if (d.getCurrentFace() == Die.Face.DYNAMITE) numDynamite++;
+        }
+        if(numDynamite >= 3) {
+            System.out.println("Dynamite blew up in " + game.players.get(0) + "'s face!");
+            player.removeHP(1);
+            if (player.isEliminated()) {
+                game.handleElim(player);
+                return;
+            }
+        }
+        
+        for(Die.Face f: game.getDiceFaces()) {
+            if (f == Die.Face.SHOOT1) {
+                targets = new ArrayList<Player>();
+                if (player.getCharacter() == Player.Character.CALAMITY_JANET) {
 
-    /*  USED TO LOAD FINAL
-    public void handleTemp(ActionEvent actionEvent) throws Exception{
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
+                    //TODO player choice, listener
+                } else {
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
+                }
+                shot1Left++;
+                
+            }
+            
+            
+            if (f == Die.Face.SHOOT2) {
+                targets = new ArrayList<Player>();
+                if (player.getCharacter() == Player.Character.CALAMITY_JANET) {
+
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
+                    //TODO player choice, listener
+                } else {
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
+                }
+                shot2Left++;
+                
+            }
+
+            EventHandler<MouseEvent> shootListener = e -> {
+                Player p = game.players.get(0);
+                try {
+                    if (e.getSource().equals(rectBot1) && !game.players.get(1).isEliminated()) p = game.players.get(1);
+                    if (e.getSource().equals(rectBot2) && !game.players.get(2).isEliminated()) p = game.players.get(2);
+                    if (e.getSource().equals(rectBot3) && !game.players.get(3).isEliminated()) p = game.players.get(3);
+                    if (e.getSource().equals(rectBot4) && !game.players.get(4).isEliminated()) p = game.players.get(4);
+                    if (e.getSource().equals(rectBot5) && !game.players.get(5).isEliminated()) p = game.players.get(5);
+                    if (e.getSource().equals(rectBot6) && !game.players.get(6).isEliminated()) p = game.players.get(6);
+                    if (e.getSource().equals(rectBot7) && !game.players.get(7).isEliminated()) p = game.players.get(7);
+
+                    if (targets.contains(p)) {
+                        if(shot1Left > 0 && (p.equals(game.players.get(1)) || p.equals(game.players.get(game.players.size()-1)))){
+                            shot1Left--;
+                            player.shootPlayer(p);
+                        }else if(shot2Left > 0 && (p.equals(game.players.get(2)) || p.equals(game.players.get(game.players.size() - 2)))){
+                            shot2Left--;
+                            player.shootPlayer(p);
+                        }
+                        
+                        if(p.isEliminated()) game.handleElim(p);
+                        //System.out.println("pp ow");
+                        
+                        if(shot1Left <= 0 && shot2Left <= 0) targets.clear();
+                    }
+
+
+                } catch (Exception e2) {
+                    //
+                }
+            };
+            rectBot1.setOnMouseClicked(shootListener);
+            rectBot2.setOnMouseClicked(shootListener);
+            rectBot3.setOnMouseClicked(shootListener);
+            rectBot4.setOnMouseClicked(shootListener);
+            rectBot5.setOnMouseClicked(shootListener);
+            rectBot6.setOnMouseClicked(shootListener);
+            rectBot7.setOnMouseClicked(shootListener);
+        }
+        
+
+        for(Die.Face f : game.getDiceFaces()) {
+            if (f == Die.Face.BEER) {
+                player.addHP(1);
+                System.out.println(player + " healed themself");
+            }
+        }
+
+        int numGat = 0;
+        for(Die.Face f : game.getDiceFaces()) {
+            if (f == Die.Face.GATLING) {
+                numGat++;
+            }
+        }
+
+        if (numGat >= 3) {
+            System.out.println(player + " fired the gatling gun");
+            for (int i = 0; i < game.players.size(); i++) {
+                if (game.players.get(i) != player) {
+                    game.players.get(i).removeHP(1);
+                    if (game.players.get(i).isEliminated()) game.handleElim(game.players.get(i));
+                }
+            }
+        }
+                
+        
+        for(Die d: game.dice){
+            d.setUnlockable(true);
+            d.setLocked(false);
+        }
+        rollCount = -1;
+        
+    }
+
+    /**
+     * Handle human player rolling shoot
+     *
+     * @param player the human player
+     * @param numS the type of shoot face on the die
+     */
+    public void handleDieShoot(Player player, int numS) {
+        if (player.getCharacter().toString().equals("Calamity Janet")) {
+            // check 1, 2 left, 1, 2 right
+        }
+        else if (player.getCharacter().toString().equals("Rose Doolan")) {
+            if (numS == 1) {
+                // check 1, 2 left; 1, 2 right
+            }
+            else if (numS == 2) {
+                // check 2, 3 left; 2, 3 right
+            }
+        }
+        else {
+            if (numS == 1) {
+                // check 1 left; 1 right
+
+            }
+            else if (numS == 2) {
+                // check 2 left; 2 right
+
+            }
+        }
+        /*
+        if (s == 1) {
+            this.rectBot1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent t) {
+                    game.players.get(0).shootPlayer(game.players.get(1));
+                }
+            });
+        }*/
+    }
+
+    /**
+     * Handle human player rolling beer
+     *
+     * @param player the human player
+     */
+    public void handleDieBeer(Player player) {
+        player.addHP(1);
+        System.out.println(player.getCharacter().toString() + " healed themself");
+    }
+
+    /**
+     * Handle human player rolling gatling
+     *
+     * @param player the human player
+     * @param numG the number of gatling rolled
+     */
+    public void handleDieGatling(Player player, int numG) {
+        if (numG >= 3) {
+            System.out.println(player.getCharacter().toString() + " fired the gatling gun");
+            for (Player p : game.players) {
+                if (p != player) {
+                    p.removeHP(1);
+                    if (p.isEliminated()) game.handleElim(p);
+                }
+            }
+        }
+    }
+
+    public void loadFinish() throws Exception {
+        //boolean win = (game.players.get(0).getCharacter().toString().equals(human));
+        boolean win = false; //= (game.players.get(0).isHuman);
+        String winners = game.players.get(0).getRole().toString();
+        if (humanRole.equals(winners)) win = true;
+        if (humanRole.equals("Deputy") && winners.equals("Sheriff")) win = true;
+        if (humanRole.equals("Sheriff") && winners.equals("Deputy")) win = true;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Finish.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
         stage.setTitle("Bang! The Dice Game");
         FinishController gc = loader.getController();
+        gc.init(winners, win);
         stage.show();
         ((Stage)polyOct.getScene().getWindow()).close();
     }
-     */
 }
