@@ -171,8 +171,6 @@ public class Game {
             }
             turnEnd = numDynamite >= 3;
         }
-    
-        //Handle Dynamite.
         if (numDynamite >= 3) {
             System.out.println("Dynamite blew up in " + player + "'s face!");
             player.removeHP(1);
@@ -181,8 +179,6 @@ public class Game {
                 return;
             }
         }
-
-        //Handle Shoot 1 and Shoot 2 at the same time.
         for (Face f : getDiceFaces()) {
             if (f == Face.SHOOT1) {
                 if(player.getCharacter() == Character.CALAMITY_JANET) {
@@ -195,7 +191,6 @@ public class Game {
                     Player target = targets[rand.nextInt(4)];
                     player.shootPlayer(target);
                     if (target.isEliminated()) handleElim(target);
-                    if (gameOver) return;
                 }
                 else {
                     Player[] targets = new Player[] {
@@ -205,10 +200,8 @@ public class Game {
                     Player target = targets[rand.nextInt(2)];
                     player.shootPlayer(target);
                     if (target.isEliminated()) handleElim(target);
-                    if (gameOver) return;
                 }
             }
-
             if (f == Face.SHOOT2) {
                 if(player.getCharacter() == Character.CALAMITY_JANET) {
                     Player[] targets = new Player[] {
@@ -220,7 +213,6 @@ public class Game {
                     Player target = targets[rand.nextInt(4)];
                     player.shootPlayer(target);
                     if (target.isEliminated()) handleElim(target);
-                    if (gameOver) return;
                 }
                 else {
                     Player[] targets = new Player[] {
@@ -230,13 +222,10 @@ public class Game {
                     Player target = targets[rand.nextInt(2)];
                     player.shootPlayer(target);
                     if (target.isEliminated()) handleElim(target);
-                    if (gameOver) return;
                 }
             }
-
         }
 
-        //Handle Beer.
         for(Face f : getDiceFaces()) {
             if (f == Face.BEER) {
                 player.addHP(1);
@@ -244,7 +233,6 @@ public class Game {
             }
         }
 
-        //Handle Gatling.
         int numGat = 0;
 		for(Face f : getDiceFaces()) {
             if (f == Face.GATLING) {
@@ -258,12 +246,10 @@ public class Game {
                 if (players.get(i) != player) {
                     players.get(i).removeHP(1);
                     if (players.get(i).isEliminated()) handleElim(players.get(i));
-                    if (gameOver) return;
                 }
             }
         }
 
-        //Unlock the dice for the next player.
         for (Die d : dice) {
             d.setUnlockable(true);
             d.setLocked(false);
@@ -390,6 +376,9 @@ public class Game {
             players.get(i).setSeatPosition(i);
         }
         System.out.println(player + " Was eliminated! They were a(n) " + player.getRole());
+        if (players.size() <= 1) {
+            gameOver = true;
+        }
         if (player.getRole() == Role.SHERRIF) {
             gameOver = true;
         }
