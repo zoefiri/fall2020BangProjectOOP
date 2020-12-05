@@ -204,7 +204,7 @@ public class Player {
 	public String getRoleMask() {
 		if (isHuman)
 			return getRole().toString();
-		if (isEliminated())
+		if (isEliminated() || getRole() == Role.SHERRIF)
 			return getRole().toString();
 		else
 			return "UNKNOWN";
