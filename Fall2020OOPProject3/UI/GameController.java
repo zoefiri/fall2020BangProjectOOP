@@ -148,6 +148,7 @@ public class GameController {
     
     private ColorAdjust black;
     private ColorAdjust white;
+    private ColorAdjust fuzzz;
 
     // ImagePatterns for filling
     private static final ImagePattern imgpatTable = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/table.jpg"));
@@ -200,6 +201,8 @@ public class GameController {
         black.setSaturation(.25);
         white = new ColorAdjust();
         white.setHue(0);
+        fuzzz = new ColorAdjust();
+        fuzzz.setSaturation(1);
 
         /*
          * Assign lambda listeners for each image which set let the player toggle their locked/unlocked state
@@ -242,6 +245,14 @@ public class GameController {
             System.out.println();
             historyTextArea.appendText("");
             updPlayers();
+            ColorAdjust plain = new ColorAdjust();
+            rectBot1.setEffect(plain);
+            rectBot2.setEffect(plain);
+            rectBot3.setEffect(plain);
+            rectBot4.setEffect(plain);
+            rectBot5.setEffect(plain);
+            rectBot6.setEffect(plain);
+            rectBot7.setEffect(plain);
         });
     }
         
@@ -426,14 +437,14 @@ public class GameController {
                 targets = new ArrayList<Player>();
                 if (player.getCharacter() == Player.Character.CALAMITY_JANET) {
 
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 + 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 + 2), game.numPlayers)));
                     //TODO player choice, listener
                 } else {
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 + 1), game.numPlayers)));
                 }
                 shot1Left++;
                 
@@ -444,14 +455,14 @@ public class GameController {
                 targets = new ArrayList<Player>();
                 if (player.getCharacter() == Player.Character.CALAMITY_JANET) {
 
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 + 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 + 2), game.numPlayers)));
                     //TODO player choice, listener
                 } else {
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 + 2), game.numPlayers)));
                 }
                 shot2Left++;
                 
@@ -472,9 +483,13 @@ public class GameController {
                         if(shot1Left > 0 && (p.equals(game.players.get(1)) || p.equals(game.players.get(game.players.size()-1)))){
                             shot1Left--;
                             player.shootPlayer(p);
+                            ((Rectangle) e.getSource()).setEffect(fuzzz);
+                            //Thread.sleep(250);
+                            //((Rectangle) e.getSource()).setEffect(new ColorAdjust());
                         }else if(shot2Left > 0 && (p.equals(game.players.get(2)) || p.equals(game.players.get(game.players.size() - 2)))){
                             shot2Left--;
                             player.shootPlayer(p);
+                            ((Rectangle) e.getSource()).setEffect(fuzzz);
                         }
                         
                         if(p.isEliminated()) game.handleElim(p);
