@@ -27,7 +27,9 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -208,12 +210,7 @@ public class GameController {
             //tempDieImageView.setImage(new Image("file:src/Fall2020OOPProject3/UI/table.jpg"));
             if (e.getSource() instanceof ImageView) {
                 Die d = new VanillaDie();
-                /*
-                if (e.getSource() == imgDie1) d = game2.dice[0];
-                if (e.getSource() == imgDie2) d = game2.dice[1];
-                if (e.getSource() == imgDie3) d = game2.dice[2];
-                if (e.getSource() == imgDie4) d = game2.dice[3];
-                if (e.getSource() == imgDie5) d = game2.dice[4];*/
+
                 for (int i = 0; i < imgDie.length; i++) {
                     if (e.getSource() == imgDie[i]) {
                         d = game.dice[i];
@@ -311,6 +308,35 @@ public class GameController {
             }
         }
     }
+    
+    public void updateDiceImages(){
+        try {
+            for (int i = 0; i < imgDie.length; i++) {
+                switch (game.dice[i].getCurrentFace()) {
+                    case BEER:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/beer.jpg"));
+                        break;
+                    case ARROW:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/arrow.png"));
+                        break;
+                    case SHOOT1:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/shoot1.jpg"));
+                        break;
+                    case SHOOT2:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/shoot2.jpg"));
+                        break;
+                    case GATLING:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/gatling.jpg"));
+                        break;
+                    case DYNAMITE:
+                        imgDie[i].setImage(new Image("/Fall2020OOPProject3/UI/art/dice/dynamite.jpg"));
+                        break;
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     int rollCount = 1;
     /**
@@ -322,10 +348,12 @@ public class GameController {
         //should call game field -> player -> roll e.g. game.roll(Character.CHAR1); and then updates the images 
         //for each of the die faces.
         historyTextArea.appendText("");
-        
+        if(rollCount > 3 || rollCount < 1) return;
+      
         //TODO update DIE PICTURES
         if(rollCount==1) {
             game.rollDice(new boolean[]{true, true, true, true, true}, game.players.get(0));
+            updateDiceImages();
         }
         else if(rollCount == 2){
             boolean[] rolls = new boolean[5];
@@ -333,6 +361,7 @@ public class GameController {
                 rolls[i] = !game.dice[i].isLocked();
 
             game.rollDice(rolls, game.players.get(0));
+            updateDiceImages();
         }
         else if(rollCount== 3){
             boolean[] rolls = new boolean[5];
@@ -340,6 +369,7 @@ public class GameController {
                 rolls[i] = !game.dice[i].isLocked();
 
             game.rollDice(rolls, game.players.get(0));
+            updateDiceImages();
             resolveDice();
             return;
         }
@@ -364,7 +394,11 @@ public class GameController {
         }
         updPlayers();
     }
-    
+
+    ArrayList<Player> targets;
+    int shot1Left= 0;
+    int shot2Left = 0;
+            
     public void resolveDice(){
         Player player = game.players.get(0);
         for(Die d: game.dice) {
@@ -384,44 +418,83 @@ public class GameController {
             }
         }
         
-        for(Die.Face f: game.getDiceFaces()){
+        for(Die.Face f: game.getDiceFaces()) {
             if (f == Die.Face.SHOOT1) {
-                if(player.getCharacter() == Player.Character.CALAMITY_JANET) {
-                    Player[] targets = new Player[] {
-                            game.players.get(Math.floorMod((player.getSeatPosition()-1), game.numPlayers)),
-                            game.players.get(Math.floorMod((player.getSeatPosition()+1), game.numPlayers)),
-                            game.players.get(Math.floorMod((player.getSeatPosition()-2), game.numPlayers)),
-                            game.players.get(Math.floorMod((player.getSeatPosition()+2), game.numPlayers))
-                    };
+                targets = new ArrayList<Player>();
+                if (player.getCharacter() == Player.Character.CALAMITY_JANET) {
+
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
                     //TODO player choice, listener
+                } else {
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
                 }
-                else {
-                    Player[] targets = new Player[] {
-                            game.players.get(Math.floorMod((player.getSeatPosition()-1), game.numPlayers)),
-                            game.players.get(Math.floorMod((player.getSeatPosition()+1), game.numPlayers))
-                    };
-                    //TODO player choice, listener
-                }
+                ;
+                shot1Left++;
+                
             }
+            
+            
             if (f == Die.Face.SHOOT2) {
-                if(player.getCharacter() == Player.Character.CALAMITY_JANET) {
-                    Player[] targets = new Player[] {
-                            game.players.get(Math.floorMod((player.getSeatPosition()-1), game.numPlayers)),
-                            game.players.get(Math.floorMod((player.getSeatPosition()+1), game.numPlayers)),
-                            game.players.get(Math.floorMod((player.getSeatPosition()-2), game.numPlayers)),
-                            game.players.get(Math.floorMod((player.getSeatPosition()+2), game.numPlayers))
-                    };
+                targets = new ArrayList<Player>();
+                if (player.getCharacter() == Player.Character.CALAMITY_JANET) {
+
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
                     //TODO player choice, listener
+                } else {
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
                 }
-                else {
-                    Player[] targets = new Player[] {
-                            game.players.get(Math.floorMod((player.getSeatPosition()-2), game.numPlayers)),
-                            game.players.get(Math.floorMod((player.getSeatPosition()+2), game.numPlayers))
-                    };
-                    //TODO player choice, listener
-                }
+                shot2Left++;
+                
             }
+
+            EventHandler<MouseEvent> shootListener = e -> {
+                Player p = game.players.get(0);
+                try {
+                    if (e.getSource().equals(rectBot1) && !game.players.get(1).isEliminated()) p = game.players.get(1);
+                    if (e.getSource().equals(rectBot2) && !game.players.get(2).isEliminated()) p = game.players.get(2);
+                    if (e.getSource().equals(rectBot3) && !game.players.get(3).isEliminated()) p = game.players.get(3);
+                    if (e.getSource().equals(rectBot4) && !game.players.get(4).isEliminated()) p = game.players.get(4);
+                    if (e.getSource().equals(rectBot5) && !game.players.get(5).isEliminated()) p = game.players.get(5);
+                    if (e.getSource().equals(rectBot6) && !game.players.get(6).isEliminated()) p = game.players.get(6);
+                    if (e.getSource().equals(rectBot7) && !game.players.get(7).isEliminated()) p = game.players.get(7);
+
+                    if (targets.contains(p)) {
+                        if(shot1Left > 0 && (p.equals(game.players.get(1)) || p.equals(game.players.get(game.players.size()-1)))){
+                            shot1Left--;
+                            player.shootPlayer(p);
+                        }else if(shot2Left > 0 && (p.equals(game.players.get(2)) || p.equals(game.players.get(game.players.size() - 2)))){
+                            shot2Left--;
+                            player.shootPlayer(p);
+                        }
+                        
+                        if(p.isEliminated()) game.handleElim(p);
+                        //System.out.println("pp ow");
+                        
+                        if(shot1Left <= 0 && shot2Left <= 0) targets.clear();
+                    }
+
+
+                } catch (Exception e2) {
+                    //
+                }
+            };
+            rectBot1.setOnMouseClicked(shootListener);
+            rectBot2.setOnMouseClicked(shootListener);
+            rectBot3.setOnMouseClicked(shootListener);
+            rectBot4.setOnMouseClicked(shootListener);
+            rectBot5.setOnMouseClicked(shootListener);
+            rectBot6.setOnMouseClicked(shootListener);
+            rectBot7.setOnMouseClicked(shootListener);
         }
+        
 
         for(Die.Face f : game.getDiceFaces()) {
             if (f == Die.Face.BEER) {
