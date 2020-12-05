@@ -22,6 +22,7 @@ public class Game {
     public int numPlayers;
 
     public ArrayList<Player> players = new ArrayList<Player>();
+    public ArrayList<Player> playersDead = new ArrayList<Player>();         // ADDED
     
     public Die[] dice;
     private Die[] extraDice;
@@ -367,6 +368,7 @@ public class Game {
     }
     
     public void handleElim(Player player) {
+        playersDead.add(player);
         players.remove(player);
         numPlayers--;
         for (int i = 0; i < players.size(); i++) {
