@@ -401,7 +401,7 @@ public class GameController {
         }
     }
 
-    ArrayList<Player> targets;
+    ArrayList<Player> targets = new ArrayList<Player>();
     int shot1Left= 0;
     int shot2Left = 0;
 
@@ -429,17 +429,17 @@ public class GameController {
         
         for(Die.Face f: game.getDiceFaces()) {
             if (f == Die.Face.SHOOT1) {
-                targets = new ArrayList<Player>();
+                
                 if (player.getCharacter() == Player.Character.CALAMITY_JANET) {
 
-                    targets.add(game.players.get(Math.floorMod((0 - 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((0 + 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((0 - 2), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((0 + 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 1), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 1), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 - 2), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 2), game.players.size())));
                     //TODO player choice, listener
                 } else {
-                    targets.add(game.players.get(Math.floorMod((0 - 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((0 + 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 1), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 1), game.players.size())));
                 }
                 shot1Left++;
                 
@@ -447,17 +447,17 @@ public class GameController {
             
             
             if (f == Die.Face.SHOOT2) {
-                targets = new ArrayList<Player>();
+                
                 if (player.getCharacter() == Player.Character.CALAMITY_JANET) {
 
-                    targets.add(game.players.get(Math.floorMod((0 - 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((0 + 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((0 - 2), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((0 + 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 1), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 1), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 - 2), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 2), game.players.size())));
                     //TODO player choice, listener
                 } else {
-                    targets.add(game.players.get(Math.floorMod((0 - 2), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((0 + 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 2), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 2), game.players.size())));
                 }
                 shot2Left++;
                 
