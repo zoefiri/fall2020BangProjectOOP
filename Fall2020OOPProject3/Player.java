@@ -40,6 +40,7 @@ public class Player {
 		}
 	}
 
+	public boolean isHuman = false;
 	protected int hp;
 	protected int arrows;
 	protected int seatPosition;
@@ -200,6 +201,8 @@ public class Player {
 	}
 
 	public String getRoleMask() {
+		if (isHuman)
+			return getRole().toString();
 		if (isEliminated())
 			return getRole().toString();
 		else
@@ -212,4 +215,5 @@ public class Player {
 		else
 			return Integer.toString(getCurrentHP());
 	}
+
 }

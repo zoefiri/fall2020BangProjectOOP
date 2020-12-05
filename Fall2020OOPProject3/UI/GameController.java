@@ -9,6 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,6 +25,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -119,7 +122,6 @@ public class GameController {
 
     public Polygon polyOct;
     
-    
     //Die images from Roll tab
     public ImageView imgDie1;
     public ImageView imgDie2;
@@ -127,7 +129,8 @@ public class GameController {
     public ImageView imgDie4;
     public ImageView imgDie5;
     public ImageView[] imgDie;
-    
+
+    public Button endTurnButton;
 
     //Button for rolling from Roll tab
     public Button btnRoll;
@@ -137,11 +140,9 @@ public class GameController {
     public TableColumn colHealth;
     public TableColumn colRole;
 
-
     // Game instance
     private Game game;
-    private ArrayList<Player> playersOLD;
-    public Button endTurnButton;
+    //private String human;
     
     private ColorAdjust black;
     private ColorAdjust white;
@@ -184,10 +185,11 @@ public class GameController {
         colRole.setCellValueFactory((new PropertyValueFactory<>("RoleMask")));
 
         game = new Game(bots, exp1, exp2);      // set up game
-        playersOLD = game.players;              // set up old players list
         polyOct.setFill(imgpatTable);           // set up table
         updPlayers();                           // set up player character cards
         updArrows();                            // set up arrows
+
+        //human = game.players.get(0).getCharacter().toString();
 
         imgDie = new ImageView[]{imgDie1, imgDie2, imgDie3, imgDie4, imgDie5};
 
@@ -251,6 +253,21 @@ public class GameController {
      *
      */
     private void updPlayers() {
+        if (!game.players.get(0).isHuman)
+            while(!game.gameOver)
+                for (Player p : game.players)
+                    game.takeComputerTurn(p);
+        if (game.gameOver)
+            try {loadFinish();} catch (Exception e) {}
+        /*
+        for (Player p : game.players)
+            if (p.getCurrentHP() <= 0) {
+                while (!p.isEliminated()) {
+                    p.removeHP(1);
+                }
+                System.out.println("HAD TO KILL MANUALLY");
+            }
+         */
         Rectangle[] rectChars = {this.rectPlayer, this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
         discoveredRolesTable.getItems().clear();
         for (int i = 0; i < game.players.size(); i++) {
@@ -264,48 +281,7 @@ public class GameController {
             rectChars[i].setFill(imgpatNone);
             rectChars[i].setStroke(Color.TRANSPARENT);
         }
-
-
-        /*
-        int j = 0;
-        for (int i = 0; i < playersOLD.size(); i++) {
-            if (game.players.get(i) != null) {
-                if (playersOLD.get(j) != game.players.get(i)) {
-                    j++;
-                    rectChars[i].setFill(imgpatDead);
-                }
-                else {
-                    rectChars[i].setFill(new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/" + game.players.get(i).getCharacter().toString() + ".png")));
-                    try {
-                        discoveredRolesTable.getItems().remove(i);
-                    } catch (IndexOutOfBoundsException e) {}
-                }
-            }
-            else
-                rectChars[i].setFill(imgpatDead);
-            j++;
-        }
-        for (Player p : game.players)
-            discoveredRolesTable.getItems().add(p);
-         */
-        /*
-        discoveredRolesTable.getItems().removeAll();
-        for (int i = 0; i < game.players.size(); i++) {
-            if (game.players.get(i).isEliminated()) {
-                rectChars[i].setFill(imgpatDead);
-            }
-            else {
-                rectChars[i].setFill(new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/characters/" + game.players.get(i).getCharacter().toString() + ".png")));
-            }
-            discoveredRolesTable.getItems().add(game.players.get(i));
-        }
-        for (int i = game.players.size(); i < rectChars.length; i++) {
-            rectChars[i].setFill(imgpatNone);
-            rectChars[i].setStroke(Color.TRANSPARENT);
-        }
-
-         */
-        //discoveredRolesTable.setItems(data); //.addAll(game.players.get(i).getCharacter().toString(), game.players.get(i).getCurrentHP(), game.players.get(i).getRole());
+        updArrows();
     }
 
     /**
@@ -386,6 +362,7 @@ public class GameController {
             resolveDice();
             return;
         }
+        updPlayers();
     }
     
     public void resolveDice(){
@@ -545,15 +522,18 @@ public class GameController {
         }
     }
 
-    /*  USED TO LOAD FINAL
-    public void handleTemp(ActionEvent actionEvent) throws Exception{
+    public void loadFinish() throws Exception {
+        //boolean win = (game.players.get(0).getCharacter().toString().equals(human));
+        boolean win = (game.players.get(0).isHuman);
+        String winners = game.players.get(0).getRole().toString();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Finish.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
         stage.setTitle("Bang! The Dice Game");
         FinishController gc = loader.getController();
+        gc.init(winners, win);
         stage.show();
         ((Stage)polyOct.getScene().getWindow()).close();
     }
-     */
 }

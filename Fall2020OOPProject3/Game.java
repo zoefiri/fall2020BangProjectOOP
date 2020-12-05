@@ -73,7 +73,7 @@ public class Game {
         for (int i = 0; i < numPlayers; i++) {
             players.add(new Player(allChars.get(i), allRoles.get(i), i));
         }
-
+        players.get(0).isHuman = true;
     }
 
     
@@ -354,7 +354,7 @@ public class Game {
         if (numGat >= 3) {
             System.out.println(player + " fired the gatling gun");
             for (int i = 0; i < players.size(); i++) {
-                if (players.get(i) != player) {
+                if (players.get(i) != player && !(players.get(i).getCharacter().toString().equals("Paul Regret"))) {
                     players.get(i).removeHP(1);
                     if (players.get(i).isEliminated()) handleElim(players.get(i));
                 }
