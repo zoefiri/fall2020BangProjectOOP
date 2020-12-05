@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Fall2020OOPProject3</OriginalElement>
+  <nodes>
+    <node x="606.0" y="380.5">Fall2020OOPProject3.CowardDie</node>
+    <node x="1008.0" y="380.5">Fall2020OOPProject3.LoudmouthDie</node>
+    <node x="1314.0" y="846.0">Fall2020OOPProject3.CowardDieTest</node>
+    <node x="0.0" y="1454.0">Fall2020OOPProject3.Main</node>
+    <node x="355.0" y="846.0">Fall2020OOPProject3.DieTest</node>
+    <node x="807.0" y="369.5">Fall2020OOPProject3.VanillaDie</node>
+    <node x="1077.0" y="846.0">Fall2020OOPProject3.BlackDieTest</node>
+    <node x="1209.0" y="238.0">Fall2020OOPProject3.Die.Face</node>
+    <node x="176.0" y="481.0">Fall2020OOPProject3.Player.Character</node>
+    <node x="807.0" y="0.0">Fall2020OOPProject3.Die</node>
+    <node x="194.0" y="1454.0">Fall2020OOPProject3.UI</node>
+    <node x="840.0" y="846.0">Fall2020OOPProject3.LoudmouthDieTest</node>
+    <node x="50.5" y="0.0">Fall2020OOPProject3.Player</node>
+    <node x="603.0" y="846.0">Fall2020OOPProject3.VanillaDieTest</node>
+    <node x="405.0" y="380.5">Fall2020OOPProject3.BlackDie</node>
+    <node x="0.0" y="846.0">Fall2020OOPProject3.Game</node>
+    <node x="0.0" y="525.0">Fall2020OOPProject3.Player.Role</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Fall2020OOPProject3.BlackDie" target="Fall2020OOPProject3.Die">
+      <point x="0.0" y="-50.0" />
+      <point x="495.5" y="208.0" />
+      <point x="825.1" y="208.0" />
+      <point x="-72.39999999999998" y="94.0" />
+    </edge>
+    <edge source="Fall2020OOPProject3.LoudmouthDie" target="Fall2020OOPProject3.Die">
+      <point x="0.0" y="-50.0" />
+      <point x="1098.5" y="218.0" />
+      <point x="933.7" y="218.0" />
+      <point x="36.200000000000045" y="94.0" />
+    </edge>
+    <edge source="Fall2020OOPProject3.VanillaDie" target="Fall2020OOPProject3.Die">
+      <point x="0.0" y="-61.0" />
+      <point x="0.0" y="94.0" />
+    </edge>
+    <edge source="Fall2020OOPProject3.CowardDie" target="Fall2020OOPProject3.Die">
+      <point x="0.0" y="-50.0" />
+      <point x="696.5" y="218.0" />
+      <point x="861.3" y="218.0" />
+      <point x="-36.200000000000045" y="94.0" />
+    </edge>
+    <edge source="Fall2020OOPProject3.Player.Role" target="Fall2020OOPProject3.Player">
+      <point x="0.0" y="-116.0" />
+      <point x="78.0" y="456.0" />
+      <point x="111.75" y="456.0" />
+      <point x="-61.25" y="215.5" />
+    </edge>
+    <edge source="Fall2020OOPProject3.Player.Character" target="Fall2020OOPProject3.Player">
+      <point x="0.0" y="-160.0" />
+      <point x="268.0" y="456.0" />
+      <point x="234.25" y="456.0" />
+      <point x="61.25" y="215.5" />
+    </edge>
+    <edge source="Fall2020OOPProject3.Die.Face" target="Fall2020OOPProject3.Die">
+      <point x="0.0" y="-192.5" />
+      <point x="1287.5" y="208.0" />
+      <point x="969.9" y="208.0" />
+      <point x="72.39999999999998" y="94.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4941935483870968" x="1112.459493744687" y="750.575598906844" />
+  <SelectedNodes>
+    <node>Fall2020OOPProject3.Game</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

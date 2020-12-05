@@ -148,6 +148,7 @@ public class GameController {
     
     private ColorAdjust black;
     private ColorAdjust white;
+    private ColorAdjust fuzzz;
 
     // ImagePatterns for filling
     private static final ImagePattern imgpatTable = new ImagePattern(new Image("/Fall2020OOPProject3/UI/art/table.jpg"));
@@ -181,7 +182,6 @@ public class GameController {
         colCharacter.setCellValueFactory(new PropertyValueFactory<>("character"));
         colHealth.setCellValueFactory(new PropertyValueFactory<>("CurrentHPMask"));
         colRole.setCellValueFactory((new PropertyValueFactory<>("RoleMask")));
-        // set up game
         game = new Game(bots, exp1, exp2);      // set up game
         polyOct.setFill(imgpatTable);           // set up table
         updPlayers();                           // set up player character cards
@@ -194,6 +194,8 @@ public class GameController {
         black.setSaturation(.25);
         white = new ColorAdjust();
         white.setHue(0);
+        fuzzz = new ColorAdjust();
+        fuzzz.setSaturation(1);
 
         /*
          * Assign lambda listeners for each image which set let the player toggle their locked/unlocked state
@@ -235,21 +237,16 @@ public class GameController {
             System.out.println();
             historyTextArea.appendText("");
             updPlayers();
+            ColorAdjust plain = new ColorAdjust();
+            rectBot1.setEffect(plain);
+            rectBot2.setEffect(plain);
+            rectBot3.setEffect(plain);
+            rectBot4.setEffect(plain);
+            rectBot5.setEffect(plain);
+            rectBot6.setEffect(plain);
+            rectBot7.setEffect(plain);
+            targets.clear();
         });
-
-        // Lambda listener on character images for shooting
-        Rectangle[] rectChars = {this.rectPlayer, this.rectBot1, this.rectBot2, this.rectBot3, this.rectBot4, this.rectBot5, this.rectBot6, this.rectBot7};
-        EventHandler<MouseEvent> shootListener = (MouseEvent e) -> {
-            if (e.getSource() instanceof Rectangle) {
-                int ind = 0;
-                for (int i = 0; i < rectChars.length; i++)
-                    if (rectChars[i] == e.getSource()) ind = i;
-                game.players.get(0).shootPlayer(game.players.get(ind));
-                if (game.players.get(ind).isEliminated()) game.handleElim(game.players.get(ind));
-                updPlayers();
-            }
-        };
-        for (Rectangle r: rectChars) r.setOnMouseClicked(shootListener);
     }
         
 
@@ -405,7 +402,7 @@ public class GameController {
         }
     }
 
-    ArrayList<Player> targets;
+    ArrayList<Player> targets = new ArrayList<Player>();
     int shot1Left= 0;
     int shot2Left = 0;
 
@@ -433,17 +430,17 @@ public class GameController {
         
         for(Die.Face f: game.getDiceFaces()) {
             if (f == Die.Face.SHOOT1) {
-                targets = new ArrayList<Player>();
+                
                 if (player.getCharacter() == Player.Character.CALAMITY_JANET) {
 
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 1), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 1), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 - 2), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 2), game.players.size())));
                     //TODO player choice, listener
                 } else {
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 1), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 1), game.players.size())));
                 }
                 shot1Left++;
                 
@@ -451,17 +448,17 @@ public class GameController {
             
             
             if (f == Die.Face.SHOOT2) {
-                targets = new ArrayList<Player>();
+                
                 if (player.getCharacter() == Player.Character.CALAMITY_JANET) {
 
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 1), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 1), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 - 2), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 2), game.players.size())));
                     //TODO player choice, listener
                 } else {
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 2), game.numPlayers)));
-                    targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 2), game.numPlayers)));
+                    targets.add(game.players.get(Math.floorMod((0 - 2), game.players.size())));
+                    targets.add(game.players.get(Math.floorMod((0 + 2), game.players.size())));
                 }
                 shot2Left++;
                 
@@ -482,9 +479,13 @@ public class GameController {
                         if(shot1Left > 0 && (p.equals(game.players.get(1)) || p.equals(game.players.get(game.players.size()-1)))){
                             shot1Left--;
                             player.shootPlayer(p);
+                            ((Rectangle) e.getSource()).setEffect(fuzzz);
+                            //Thread.sleep(250);
+                            //((Rectangle) e.getSource()).setEffect(new ColorAdjust());
                         }else if(shot2Left > 0 && (p.equals(game.players.get(2)) || p.equals(game.players.get(game.players.size() - 2)))){
                             shot2Left--;
                             player.shootPlayer(p);
+                            ((Rectangle) e.getSource()).setEffect(fuzzz);
                         }
                         
                         if(p.isEliminated()) game.handleElim(p);
