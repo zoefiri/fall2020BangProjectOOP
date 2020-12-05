@@ -1,0 +1,29 @@
+=============================== Top =================================
+Game
+============================== Middle ===============================
+- rand: Random
+- useExpansion1: boolean
+- useExpansion2: boolean
+- numPlayers: int
+- players: ArrayList<Player>
+- playersDead: layers: ArrayList<Player>
+- dice: Die[]
+- extraDice: Die[]
+- numDice: int
+- useExtraDice: boolean
+- numArrows: int
+- gameOver: boolean
+- textArea: TextArea 
+============================== Bottom ===============================
++ Game(bots: int, expansion1: boolean, expansion2: boolean)
++ getDiceFaces(): Face[]
++ rollDice(diceToRoll: boolean[], player: Player)
++ rollDice(diceToRoll: boolean[], player: Player, useLoudmouth: boolean, useCoward: boolean)
++ takeArrow(p: Player)
++ takeComputerTurn(player: Player) 
++ takePlayerTurn(player: Player) 
++ handleElim(player: Player) 
++ areRenegadesOrOutlawsAlive(): boolean
++ getRolesForGame(numPlayers: int): Role[] 
++ main(args: String[])
+=====================================================================

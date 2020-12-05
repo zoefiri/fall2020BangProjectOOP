@@ -1,0 +1,16 @@
+=============================== Top =================================
+Die
+==o=========================== Middle ===============================
+- rand: Random
+- currentFace: Face
+- locked: boolean
+- unlockable: book
+============================== Bottom ================================
++ roll(): Face
++ toggleLocked():
++ isLocked(): boolean
++ setLocked(lock: boolean):
++ geUnlockable(): boolean
++ isUnlockable(unlockable:boolean): boolean
++ getCurrentFace(): Face
+=========================================================================
