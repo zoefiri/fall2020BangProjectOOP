@@ -112,7 +112,7 @@ public class PlayerTest {
      */
     @Test
     public void testGetCurrentArrows() {
-        int expResult = 1;
+        int expResult = 0;
         int result = testPlayer.getCurrentArrows();
         assertEquals(expResult, result);
     }
@@ -122,7 +122,7 @@ public class PlayerTest {
      */
     @Test
     public void testGetCurrentHP() {
-        int expResult = 7;
+        int expResult = 8;
         int result = testPlayer.getCurrentHP();
         assertEquals(expResult, result);
     }
@@ -174,7 +174,7 @@ public class PlayerTest {
      */
     @Test
     public void testGetCurrentHPMask() {
-        String expResult = "7";
+        String expResult = "8";
         String result = testPlayer.getCurrentHPMask();
         assertEquals(expResult, result);
     }
