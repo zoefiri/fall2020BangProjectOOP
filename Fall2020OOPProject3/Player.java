@@ -69,11 +69,12 @@ public class Player {
 	/** 
 	 * @return int The HP the Player has after the attack.
 	 */
-	public int indianAttack() {
-		if (arrows == 0) return hp;
-		hp -= (character == Character.JOURDONNAIS) ? 1 : arrows;
-		arrows = 0;
-		return hp; 
+	public void indianAttack() {
+		if (arrows != 0) {
+			if (character == Character.JOURDONNAIS) removeHP(1);
+			else removeHP(arrows);
+			arrows = 0;
+		}
 	}
 
 	

@@ -144,7 +144,7 @@ public class GameController {
 
     // Game instance
     private Game game;
-    //private String human;
+    private String humanRole;
     
     private ColorAdjust black;
     private ColorAdjust white;
@@ -191,7 +191,7 @@ public class GameController {
         updPlayers();                           // set up player character cards
         updArrows();                            // set up arrows
 
-        //human = game.players.get(0).getCharacter().toString();
+        humanRole = game.players.get(0).getRole().toString();
 
         imgDie = new ImageView[]{imgDie1, imgDie2, imgDie3, imgDie4, imgDie5};
 
@@ -236,11 +236,12 @@ public class GameController {
                 System.out.println();
                 System.out.println(game.players.get(i).getCharacter() + "'s turn");
                 game.takeComputerTurn(game.players.get(i));
-                updPlayers();
+                //updPlayers();
             }
             rollCount = 1;
             System.out.println();
             historyTextArea.appendText("");
+            updPlayers();
         });
     }
         
@@ -250,10 +251,12 @@ public class GameController {
      *
      */
     private void updPlayers() {
+        if (game.players.size() == 0)
+            try {loadFinish();} catch (Exception e) {}
         if (!game.players.get(0).isHuman)
             while(!game.gameOver)
-                for (Player p : game.players)
-                    game.takeComputerTurn(p);
+                for (int i = 0; i < game.players.size(); i++)
+                    game.takeComputerTurn(game.players.get(i));
         if (game.gameOver)
             try {loadFinish();} catch (Exception e) {}
         /*
@@ -392,7 +395,7 @@ public class GameController {
             resolveDice();
             return;
         }
-        updPlayers();
+        // updPlayers();
     }
 
     ArrayList<Player> targets;
@@ -432,7 +435,6 @@ public class GameController {
                     targets.add(game.players.get(Math.floorMod((player.getSeatPosition() - 1), game.numPlayers)));
                     targets.add(game.players.get(Math.floorMod((player.getSeatPosition() + 1), game.numPlayers)));
                 }
-                ;
                 shot1Left++;
                 
             }
@@ -597,8 +599,11 @@ public class GameController {
 
     public void loadFinish() throws Exception {
         //boolean win = (game.players.get(0).getCharacter().toString().equals(human));
-        boolean win = (game.players.get(0).isHuman);
+        boolean win = false; //= (game.players.get(0).isHuman);
         String winners = game.players.get(0).getRole().toString();
+        if (humanRole.equals(winners)) win = true;
+        if (humanRole.equals("Deputy") && winners.equals("Sheriff")) win = true;
+        if (humanRole.equals("Sheriff") && winners.equals("Deputy")) win = true;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Finish.fxml"));
         Stage stage = new Stage();

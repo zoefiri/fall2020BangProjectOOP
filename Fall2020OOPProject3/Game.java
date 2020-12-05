@@ -138,8 +138,9 @@ public class Game {
         
         numArrows--;
         if (numArrows <= 0) {
-            for (Player player : players) {
-                player.indianAttack();
+            for (int i = 0; i < players.size(); i++) {
+                players.get(i).indianAttack();
+                if (players.get(i).isEliminated()) handleElim(players.get(i));
             }
             numArrows = 9;
         }
