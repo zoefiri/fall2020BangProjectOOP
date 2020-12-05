@@ -245,6 +245,7 @@ public class GameController {
             rectBot5.setEffect(plain);
             rectBot6.setEffect(plain);
             rectBot7.setEffect(plain);
+            targets.clear();
         });
     }
         
