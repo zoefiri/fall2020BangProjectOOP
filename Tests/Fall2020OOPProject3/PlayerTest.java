@@ -29,7 +29,8 @@ public class PlayerTest {
     @Test
     public void testIndianAttack() {
         int expResult = 8;
-        int result = testPlayer.indianAttack();
+        testPlayer.indianAttack();
+        int result = testPlayer.getCurrentHP();
         assertEquals(expResult, result);
     }
 
