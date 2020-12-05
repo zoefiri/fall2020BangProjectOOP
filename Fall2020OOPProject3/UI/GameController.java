@@ -164,37 +164,30 @@ public class GameController {
      * @param exp2 Undead or Alive expansion enabled
      */
     public void init(int bots, boolean exp1, boolean exp2) {
-
         System.setOut(new PrintStream(System.out) {
             public void println(String s) {
                 historyTextArea.appendText(s + System.lineSeparator());
             }
-
             public void println() {
                 historyTextArea.appendText(System.lineSeparator());
                 historyTextArea.setScrollTop(Double.MAX_VALUE);
             }
-
             public void print(String s) {
                 historyTextArea.appendText(s);
                 historyTextArea.setScrollTop(Double.MAX_VALUE);
             }
         });
-
         // set up discovered roles table
         colCharacter.setCellValueFactory(new PropertyValueFactory<>("character"));
         colHealth.setCellValueFactory(new PropertyValueFactory<>("CurrentHPMask"));
         colRole.setCellValueFactory((new PropertyValueFactory<>("RoleMask")));
-
         game = new Game(bots, exp1, exp2);      // set up game
         polyOct.setFill(imgpatTable);           // set up table
         updPlayers();                           // set up player character cards
         updArrows();                            // set up arrows
-
         humanRole = game.players.get(0).getRole().toString();
-
+        // set up dice
         imgDie = new ImageView[]{imgDie1, imgDie2, imgDie3, imgDie4, imgDie5};
-
         black = new ColorAdjust();
         black.setHue(-1);
         black.setSaturation(.25);
@@ -236,7 +229,6 @@ public class GameController {
                 System.out.println();
                 System.out.println(game.players.get(i).getCharacter() + "'s turn");
                 game.takeComputerTurn(game.players.get(i));
-                //updPlayers();
             }
             rollCount = 1;
             System.out.println();
@@ -248,7 +240,6 @@ public class GameController {
 
     /**
      * Update Players and Roles and Details tabs to reflect players still alive
-     *
      */
     private void updPlayers() {
         if (game.players.size() == 0)
@@ -286,7 +277,6 @@ public class GameController {
 
     /**
      * Update arrow art to reflect the number of arrows held by each player or bot
-     *
      */
     private void updArrows() {
         Circle[] play = {this.circPlayer1, this.circPlayer2, this.circPlayer3, this.circPlayer4, this.circPlayer5, this.circPlayer6, this.circPlayer7, this.circPlayer8, this.circPlayer9};
@@ -311,7 +301,10 @@ public class GameController {
             }
         }
     }
-    
+
+    /**
+     * Updates dice images on Roll tab
+     */
     public void updateDiceImages(){
         try {
             for (int i = 0; i < imgDie.length; i++) {
@@ -395,13 +388,15 @@ public class GameController {
             resolveDice();
             return;
         }
-        // updPlayers();
     }
 
     ArrayList<Player> targets;
     int shot1Left= 0;
     int shot2Left = 0;
-            
+
+    /**
+     * Act upon the dice chosen by players on Roll tab
+     */
     public void resolveDice(){
         Player player = game.players.get(0);
         for(Die d: game.dice) {
